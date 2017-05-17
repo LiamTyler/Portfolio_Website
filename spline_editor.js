@@ -1,13 +1,12 @@
 var ctx;
-var paint = false;
-var lastX, lastY;
-var inCanvas = false;
+var lineWidth = 1;
 var lineColor = "#0000FF";
 var circleColor = "#FF0000";
-var spline;
+var current_spline;
+var all_splines = new Array();
 
-var radius = 4;
-var lineWidth = 1;
+var radius = 2;
+var circleLineWidth = 1;
 var width;
 var height;
 
@@ -65,7 +64,6 @@ Spline.prototype.drawCurve = function () {
     ctx.beginPath();
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
-    ctx.lineJoin = "round";
     var p0 = this.points[0];
     var p1 = this.points[1];
     ctx.moveTo(p0.x, p0.y);
@@ -100,46 +98,44 @@ Spline.prototype.drawPoints = function() {
     }
 }
 
-function drawLine(x1, y1, dragging) {
-    if (dragging) {
-        ctx.beginPath();
-        ctx.strokeStyle = lineColor;
-        ctx.lineWidth = lineWidth;
-        ctx.lineJoin = "round";
-        ctx.moveTo(lastX, lastY);
-        ctx.lineTo(x, y);
-        ctx.closePath();
-        ctx.stroke();
-    }
-}
-
 function drawCircle(x, y) {
     ctx.beginPath();
     ctx.strokeStyle = circleColor;
-    ctx.lineWidth = lineWidth;
-    ctx.lineJoin = "round";
+    ctx.lineWidth = circleLineWidth;
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
     ctx.stroke();
 }
 
 function redraw() {
-    ctx.clearRect(0, 0, width, height);
-    spline.draw();
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    current_spline.draw();
+    for (var i = 0; i < all_splines.length; i++) {
+        all_splines[i].draw();
+    }
 }
 
 $(document).ready(function() {
-    ctx = document.getElementById("canvas").getContext("2d");
-    width = document.getElementById("canvas").width;
-    height = document.getElementById("canvas").height;
+    var canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    ctx.lineJoin = "round";
+    width = canvas.width;
+    height = canvas.height;
 
-    spline = new Spline();
+    current_spline = new Spline();
 
     $("#canvas").mousedown(function(e) {
         var mouseX = e.pageX - this.offsetLeft;
         var mouseY = e.pageY - this.offsetTop;
-        spline.addPoint(mouseX, mouseY);
+        current_spline.addPoint(mouseX, mouseY);
         redraw();
     });
-
+    $(window).keypress(function(e) {
+        if (e.which == 32) {
+            if (current_spline.points.length != 0) {
+                all_splines.push(current_spline);
+                current_spline = new Spline();
+            }
+        }
+    });
 });
 

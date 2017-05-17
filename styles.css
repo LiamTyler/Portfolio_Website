@@ -1,5 +1,6 @@
 canvas {
-    background: url(http://i.imgur.com/5RIXWIE.png);
+    background-color: #FFF;
+    border: 1px solid black;
 }
 
 #canvasDiv {
