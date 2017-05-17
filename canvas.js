@@ -14,6 +14,12 @@ function Draw(x, y, dragging) {
         ctx.lineTo(x, y);
         ctx.closePath();
         ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(x, y, 40, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.stroke();
+
     }
     // lastX = x; lastY = y;
 }
