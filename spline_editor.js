@@ -15,26 +15,44 @@ var width;
 var height;
 
 function Point() {
-        this.x = 0;
-        this.y = 0;
-        this.dx = 0;
-        this.dy = 0;
+    this.x = 0;
+    this.y = 0;
+    this.dx = 0;
+    this.dy = 0;
+    this.t = 0;
 }
 function Point(x, y) {
-        this.x = x;
-        this.y = y;
-        this.dx = 0;
-        this.dy = 0;
+    this.x = x;
+    this.y = y;
+    this.dx = 0;
+    this.dy = 0;
+    this.t = 0;
 }
 function Point(x, y, dx, dy) {
-        this.x = x;
-        this.y = y;
-        this.dx = dx;
-        this.dy = dy;
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.t = 0;
+}
+function Point(x, y, dx, dy, t) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.t = t;
+}
+
+function magnitude(end, start) {
+    var dx = (end.x - start.x) * (end.x - start.x);
+    var dy = (end.y - start.y) * (end.y - start.y);
+    return Math.sqrt(dx + dy);
 }
 
 function Spline() {
     this.points = new Array();
+    this.time = 2;
+    this.length = 0;
 }
 
 Spline.prototype.addPoint = function(x, y) {
@@ -46,7 +64,9 @@ Spline.prototype.addPoint = function(x, y) {
         var p0 = this.points[len - 2];
         p.dx = (p.x - p0.x) / 2.0;
         p.dy = (p.y - p0.y) / 2.0;
+        this.length += magnitude(p, p0);
     }
+
     // Now can calculate the next average derivative
     if (len >= 3) {
         var p0 = this.points[len - 3];
@@ -58,6 +78,75 @@ Spline.prototype.addPoint = function(x, y) {
         var p0 = this.points[0];
         p0.dx = (p.x - p0.x) / 2.0;
         p0.dy = (p.y - p0.y) / 2.0;
+    }
+    this.fixTimes();
+}
+
+Spline.prototype.fixTimes = function() {
+    var tot = 0;
+    var m = 0;
+    this.points[0].t = 0;
+    for (var i = 1; i < this.points.length; i++) {
+        m = magnitude(this.points[i], this.points[i - 1]);
+        tot += m;
+        this.points[i].t = this.time * (tot / this.length);
+    }
+}
+
+Spline.prototype.animate = function() {
+    ctx.beginPath();
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = lineWidth;
+    var p = this.points[0];
+    ctx.moveTo(p.x, p.y);
+
+}
+
+Spline.prototype.getSegment = function(t) {
+    var i;
+    var n = this.points.length;
+    for(i = 0; i < (n - 1) && !(this.points[i].t <= t && t <= this.points[i + 1].t); i++);
+    return i;
+}
+
+Spline.prototype.getPosition = function (t) {
+    t = Math.max(Math.min(this.time, t), 0);
+    var seg = this.getSegment(t);
+    var p0 = this.points[seg];
+    var p1 = this.points[seg + 1];
+    var tRange = p1.t - p0.t;
+    t = (t - p0.t) / tRange;
+    var p0dx = p0.dx;
+    var p0dy = p0.dy;
+    var p1dx = p1.dx;
+    var p1dy = p1.dy;
+    var t2 = t*t;
+    var t3 = t*t*t;
+    var x = (2*t3 - 3*t2 + 1)*p0.x + (t3 - 2*t2 + t)*p0dx +
+            (-2*t3 + 3*t2)*p1.x + (t3 - t2)*p1dx;
+    var y = (2*t3 - 3*t2 + 1)*p0.y + (t3 - 2*t2 + t)*p0dy +
+            (-2*t3 + 3*t2)*p1.y + (t3 - t2)*p1dy;
+    return [x, y];
+}
+
+Spline.prototype.drawT = function() {
+    if (this.points.length < 2)
+        return;
+    ctx.beginPath();
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = lineWidth;
+    var p = new Point();
+    p.x = this.points[0].x;
+    p.y = this.points[0].y;
+    for (var t = 0; t <= this.time + .01; t += .01) {
+        var ret = this.getPosition(t);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(ret[0], ret[1]);
+        p.x = ret[0];
+        p.y = ret[1];
+        ctx.closePath();
+        ctx.stroke();
     }
 }
 
@@ -73,7 +162,7 @@ Spline.prototype.drawCurve = function () {
         p0 = this.points[i];
         p1 = this.points[i + 1];
 
-        for (var t = 0.1; t <= 1.0; t += .1) {
+        for (var t = 0; t <= 1.0; t += .1) {
             var t2 = t*t;
             var t3 = t*t*t;
             var npx = (2*t3 - 3*t2 + 1)*p0.x + (t3 - 2*t2 + t)*p0.dx +
@@ -81,6 +170,7 @@ Spline.prototype.drawCurve = function () {
             var npy = (2*t3 - 3*t2 + 1)*p0.y + (t3 - 2*t2 + t)*p0.dy +
                       (-2*t3 + 3*t2)*p1.y + (t3 - t2)*p1.dy;
             ctx.lineTo(npx, npy);
+            // ctx.stroke();
         }
     }
     ctx.stroke();
@@ -88,7 +178,8 @@ Spline.prototype.drawCurve = function () {
 
 Spline.prototype.draw = function() {
     this.drawPoints();
-    this.drawCurve();
+    // this.drawCurve();
+    this.drawT();
 }
 
 Spline.prototype.drawPoints = function() {
@@ -170,7 +261,16 @@ $(document).ready(function() {
     height = canvas.height;
 
     current_spline = new Spline();
+    current_spline.addPoint(54, 127);
+    current_spline.addPoint(297, 227);
+    current_spline.addPoint(347, 145);
+    current_spline.addPoint(245, 145);
+    current_spline.addPoint(129, 409);
+    current_spline.addPoint(67, 395);
+    current_spline.addPoint(102, 305);
+    current_spline.addPoint(349, 436);
     all_splines.push(current_spline);
+    redraw();
 
     $("#canvas").mousedown(function(e) {
         var mouseX = e.pageX - this.offsetLeft;
