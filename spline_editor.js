@@ -1,6 +1,10 @@
 var ctx;
 var editMode = false;
 
+var timer;
+var time = 0;
+var interval = 10;
+
 var lineWidth = 1;
 var lineColor = "#0000FF";
 var circleColor = "#FF0000";
@@ -9,7 +13,7 @@ var all_splines = new Array();
 var selectedSpline = null;
 var selectedPoint = null;
 
-var radius = 3;
+var radius = 5;
 var circleLineWidth = 1;
 var width;
 var height;
@@ -51,7 +55,7 @@ function magnitude(end, start) {
 
 function Spline() {
     this.points = new Array();
-    this.time = 2;
+    this.time = 1;
     this.length = 0;
 }
 
@@ -94,12 +98,21 @@ Spline.prototype.fixTimes = function() {
 }
 
 Spline.prototype.animate = function() {
+    if (time == current_spline.time)
+        clearInterval(timer);
+
+    // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.beginPath();
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
-    var p = this.points[0];
-    ctx.moveTo(p.x, p.y);
-
+    var ret1 = current_spline.getPosition(time);
+    time += interval / 1000.0 
+    var ret2 = current_spline.getPosition(time);
+    ctx.beginPath();
+    ctx.moveTo(ret1[0], ret1[1]);
+    ctx.lineTo(ret2[0], ret2[1]);
+    ctx.closePath();
+    ctx.stroke();
 }
 
 Spline.prototype.getSegment = function(t) {
@@ -150,6 +163,8 @@ Spline.prototype.drawT = function() {
     }
 }
 
+
+
 Spline.prototype.drawCurve = function () {
     ctx.beginPath();
     ctx.strokeStyle = lineColor;
@@ -178,8 +193,8 @@ Spline.prototype.drawCurve = function () {
 
 Spline.prototype.draw = function() {
     this.drawPoints();
-    // this.drawCurve();
-    this.drawT();
+    this.drawCurve();
+    // this.drawT();
 }
 
 Spline.prototype.drawPoints = function() {
@@ -270,7 +285,8 @@ $(document).ready(function() {
     current_spline.addPoint(102, 305);
     current_spline.addPoint(349, 436);
     all_splines.push(current_spline);
-    redraw();
+    // redraw();
+    timer = setInterval(current_spline.animate, interval);
 
     $("#canvas").mousedown(function(e) {
         var mouseX = e.pageX - this.offsetLeft;
@@ -283,8 +299,8 @@ $(document).ready(function() {
             var spline;
             var point = -1;
             for (var s = 0; s < all_splines.length; s++) {
-                spline = all_splines[s];
-                var points = spline.points;
+                spline = s;
+                var points = all_splines[s].points;
                 for (var p = 0; p < points.length; p++) {
                     if (Math.abs(points[p].x - mouseX) <= radius &&
                         Math.abs(points[p].y - mouseY) <= radius) {
@@ -304,18 +320,12 @@ $(document).ready(function() {
         if (selectedPoint != null) {
             var mouseX = e.pageX - this.offsetLeft;
             var mouseY = e.pageY - this.offsetTop;
-            selectedSpline.changePoint(selectedPoint, mouseX, mouseY);
+            all_splines[selectedSpline].changePoint(selectedPoint, mouseX, mouseY);
             redraw();
         }
     });
 
     $("#canvas").mouseup(function(e) {
-        if (selectedPoint != null) {
-            selectedPoint = null;
-            selectedSpline = null;
-        }
-    });
-    $("#canvas").mouseleave(function(e) {
         if (selectedPoint != null) {
             selectedPoint = null;
             selectedSpline = null;
@@ -328,9 +338,22 @@ $(document).ready(function() {
                 current_spline = new Spline();
                 all_splines.push(current_spline);
             }
-        }
-        else if (e.which == 83 || e.which == 115) {
+        } else if (e.which == 83 || e.which == 115) {
             editMode = !editMode;
+            redraw();
+        } else if (editMode && e.which == 100 && selectedPoint != null) {
+            var newspline = new Spline();
+            newspline.time = all_splines[selectedSpline].time;
+            for(var i = 0; i < all_splines[selectedSpline].points.length; i++) {
+                if (i != selectedPoint) {
+                    var p = all_splines[selectedSpline].points[i];
+                    newspline.addPoint(p.x, p.y);
+                }
+            }
+            all_splines[selectedSpline] = newspline;
+            current_spline = newspline;
+            selectedPoint = null;
+            selectedSpline = null;
             redraw();
         }
     });
