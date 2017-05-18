@@ -1,11 +1,12 @@
 var ctx;
 var editMode = false;
 
-var timer;
+var timer = null;
 var time = 0;
-var interval = 10;
+var timeIndex = 0;
+var interval = 5;
 
-var lineWidth = 1;
+var lineWidth = 2;
 var lineColor = "#0000FF";
 var circleColor = "#FF0000";
 var current_spline;
@@ -59,6 +60,12 @@ function Spline() {
     this.length = 0;
 }
 
+function Spline(time) {
+    this.points = new Array();
+    this.time = time;
+    this.length = 0;
+}
+
 Spline.prototype.addPoint = function(x, y) {
     var p = new Point(x, y);
     this.points.push(p);
@@ -97,17 +104,34 @@ Spline.prototype.fixTimes = function() {
     }
 }
 
-Spline.prototype.animate = function() {
-    if (time == current_spline.time)
+function animate() {
+    if (timeIndex == all_splines.length) {
         clearInterval(timer);
+        return;
+    };
+
+    var s = all_splines[timeIndex];
+    s.animate();
+    if (time >= s.time) {
+        time = 0;
+        timeIndex += 1;
+    }
+}
+
+Spline.prototype.animate = function() {
+    /*
+    if (time == current_spline.time) {
+        clearInterval(timer);
+    }
+    */
 
     // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.beginPath();
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
-    var ret1 = current_spline.getPosition(time);
+    var ret1 = this.getPosition(time);
     time += interval / 1000.0 
-    var ret2 = current_spline.getPosition(time);
+    var ret2 = this.getPosition(time);
     ctx.beginPath();
     ctx.moveTo(ret1[0], ret1[1]);
     ctx.lineTo(ret2[0], ret2[1]);
@@ -163,8 +187,6 @@ Spline.prototype.drawT = function() {
     }
 }
 
-
-
 Spline.prototype.drawCurve = function () {
     ctx.beginPath();
     ctx.strokeStyle = lineColor;
@@ -193,7 +215,8 @@ Spline.prototype.drawCurve = function () {
 
 Spline.prototype.draw = function() {
     this.drawPoints();
-    this.drawCurve();
+    if (this.points.length > 1)
+        this.drawCurve();
     // this.drawT();
 }
 
@@ -275,7 +298,7 @@ $(document).ready(function() {
     width = canvas.width;
     height = canvas.height;
 
-    current_spline = new Spline();
+    /*
     current_spline.addPoint(54, 127);
     current_spline.addPoint(297, 227);
     current_spline.addPoint(347, 145);
@@ -284,9 +307,9 @@ $(document).ready(function() {
     current_spline.addPoint(67, 395);
     current_spline.addPoint(102, 305);
     current_spline.addPoint(349, 436);
-    all_splines.push(current_spline);
-    // redraw();
-    timer = setInterval(current_spline.animate, interval);
+    */
+    loadName();
+    timer = setInterval(animate, interval);
 
     $("#canvas").mousedown(function(e) {
         var mouseX = e.pageX - this.offsetLeft;
@@ -308,6 +331,8 @@ $(document).ready(function() {
                         break;
                     }
                 }
+                if (p != points.length)
+                    break;
             }
             if (point == -1)
                 return;
@@ -355,7 +380,109 @@ $(document).ready(function() {
             selectedPoint = null;
             selectedSpline = null;
             redraw();
+        } else if (editMode && e.which == 113 && selectedPoint != null) {
+            var s = all_splines[selectedSpline];
+            for (var i = 0; i < s.points.length; i++)
+                console.log(s.points[i].x, s.points[i].y);
         }
     });
 });
+
+function loadName() {
+    var all_segments = [];
+
+    var first1Time = 1;
+    var first1 = [58, 55,
+                  205, 114,
+                  246, 66,
+                  179, 65,
+                  107, 230,
+                  59, 208,
+                  80, 175,
+                  247, 232,
+                  289, 229,
+                  339, 162,
+                  299, 231,
+                  373, 226,
+                  417, 177,
+                  475, 170,
+                  475, 220,
+                  411, 232,
+                  390, 215,
+                  408, 186 ];
+    all_segments.push(first1Time);
+    all_segments.push(first1);
+
+    var first2Time = 1;
+    var first2 = [483, 180,
+                  483, 224,
+                  535, 211,
+                  576, 168,
+                  617, 168,
+                  604, 226,
+                  621, 170,
+                  660, 164,
+                  678, 194,
+                  674, 221, // 2x
+                  693, 164,
+                  732, 162,
+                  729, 224,
+                  781, 214,
+                  809, 117];
+    all_segments.push(first2Time);
+    all_segments.push(first2);
+
+    var first3Time = .05;
+    var first3 = [352, 126,
+                  386, 98];
+    all_segments.push(first3Time);
+    all_segments.push(first3);
+
+    var second1Time = 2;
+    var second1 = [208, 313,
+                  165, 485,
+                  106, 461,
+                  130, 434,
+                  248, 479,
+                  294, 425,
+                  275, 470,
+                  313, 479,
+                  351, 440,
+                  342, 437,
+                  318, 568,
+                  281, 568,
+                  404, 423,
+                  437, 310,
+                  395, 328,
+                  422, 491,
+                  512, 464,
+                  512, 423,
+                  474, 436,
+                  493, 480,
+                  558, 495,
+                  605, 431,
+                  646, 448,
+                  625, 499,
+                  676, 501,
+                  745, 454];
+    all_segments.push(second1Time);
+    all_segments.push(second1);
+
+    var second2Time = .15;
+    var second2 = [106, 302,
+                  106, 318,
+                  279, 324];
+    all_segments.push(second2Time);
+    all_segments.push(second2);
+
+    for (var i = 0; i < all_segments.length; i += 2)
+        addPoints(all_segments[i], all_segments[i + 1]);
+}
+
+function addPoints(time, arr) {
+    current_spline = new Spline(time);
+    for (var i = 0; i < arr.length; i += 2)
+        current_spline.addPoint(arr[i], arr[i + 1]);
+    all_splines.push(current_spline);
+}
 
