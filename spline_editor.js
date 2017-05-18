@@ -7,7 +7,7 @@ var timeIndex = 0;
 var interval = 5;
 
 var lineWidth = 2;
-var lineColor = "#0000FF";
+var lineColor = "#000000";
 var circleColor = "#FF0000";
 var current_spline;
 var all_splines = new Array();
