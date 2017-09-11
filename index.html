@@ -22,6 +22,25 @@
       </nav>
       <div id="canvasDiv">
         <canvas id="canvas" width="1000" height="600"></canvas>
+        <div id="canvasDescription">
+          <h3 class="centerText">Spline Editor</h3>
+          <p class="centerText">The curves above are made of sets of points, connected by creating a Catmull-Rom spline. In draw mode, click to add points to the current selected spline. In edit mode, the control points become visible, and you can move them individually and delete points.</p>
+          <h4>General Controls</h4>
+          <ul>
+            <li><strong>S</strong>: Switch between draw mode and edit mode</li>
+            <li><strong>C</strong>: Clear the canvas</li>
+          </ul>
+          <h4>Draw Mode Controls</h4>
+          <ul>
+            <li><strong>Left Click</strong>: Add a new point to the end of the current selected spline</li>
+            <li><strong>Spacebar</strong>: The next point added will be the first on a new spline</li>
+          </ul>
+          <h4>Edit Mode Controls</h4>
+          <ul>
+            <li><strong>Left Click and Hold on a Point</strong>: Grab a point to move around</li>
+            <li><strong>D</strong>: Delete the point that is currently being grabbed</li>
+          </ul>
+        </div>
       </div>
     </body>
 </html>

@@ -338,6 +338,7 @@ $(document).ready(function() {
                 return;
             selectedPoint = point;
             selectedSpline = spline;
+            current_spline = all_splines[selectedSpline];
         }
     });
 
@@ -384,6 +385,13 @@ $(document).ready(function() {
             var s = all_splines[selectedSpline];
             for (var i = 0; i < s.points.length; i++)
                 console.log(s.points[i].x, s.points[i].y);
+        } else if (e.which == 67 || e.which == 99) { // if 'c' is pressed
+            all_splines = [];
+            current_spline = new Spline();
+            all_splines.push(current_spline);
+            selectedPoint = null;
+            selectedSpline = null;
+            redraw();
         }
     });
 });
