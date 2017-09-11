@@ -1,46 +1,41 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Liam Tyler</title>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <script src="jquery-3.2.1.js"></script>
-        <!--
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="canvas.js"></script>
-        -->
-        <script src="spline_editor.js"></script>
-
-    </head>
-    <body>
-      <nav>
+  <head>
+    <meta charset="utf-8">
+    <title>Liam Tyler</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="jquery-3.2.1.js"></script>
+    <script src="spline_editor.js"></script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+      </ul>
+    </nav>
+    <div id="canvasDiv">
+      <canvas id="canvas" width="1000" height="600"></canvas>
+      <div id="canvasDescription">
+        <h3 class="centerText">Spline Editor</h3>
+        <p class="centerText">The curves above are made of sets of points, connected by creating a Catmull-Rom spline. In draw mode, click to add points to the current selected spline. In edit mode, the control points become visible, and you can move them individually and delete points.</p>
+        <h4>General Controls</h4>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Portfolio</a></li>
+          <li><strong>S</strong>: Switch between draw mode and edit mode</li>
+          <li><strong>C</strong>: Clear the canvas</li>
         </ul>
-      </nav>
-      <div id="canvasDiv">
-        <canvas id="canvas" width="1000" height="600"></canvas>
-        <div id="canvasDescription">
-          <h3 class="centerText">Spline Editor</h3>
-          <p class="centerText">The curves above are made of sets of points, connected by creating a Catmull-Rom spline. In draw mode, click to add points to the current selected spline. In edit mode, the control points become visible, and you can move them individually and delete points.</p>
-          <h4>General Controls</h4>
-          <ul>
-            <li><strong>S</strong>: Switch between draw mode and edit mode</li>
-            <li><strong>C</strong>: Clear the canvas</li>
-          </ul>
-          <h4>Draw Mode Controls</h4>
-          <ul>
-            <li><strong>Left Click</strong>: Add a new point to the end of the current selected spline</li>
-            <li><strong>Spacebar</strong>: The next point added will be the first on a new spline</li>
-          </ul>
-          <h4>Edit Mode Controls</h4>
-          <ul>
-            <li><strong>Left Click and Hold on a Point</strong>: Grab a point to move around</li>
-            <li><strong>D</strong>: Delete the point that is currently being grabbed</li>
-          </ul>
-        </div>
+        <h4>Draw Mode Controls</h4>
+        <ul>
+          <li><strong>Left Click</strong>: Add a new point to the end of the current selected spline</li>
+          <li><strong>Spacebar</strong>: The next point added will be the first on a new spline</li>
+        </ul>
+        <h4>Edit Mode Controls</h4>
+        <ul>
+          <li><strong>Left Click and Hold on a Point</strong>: Grab a point to move around</li>
+          <li><strong>D</strong>: Delete the point that is currently being grabbed</li>
+        </ul>
       </div>
-    </body>
+    </div>
+  </body>
 </html>

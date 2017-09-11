@@ -391,6 +391,7 @@ $(document).ready(function() {
             all_splines.push(current_spline);
             selectedPoint = null;
             selectedSpline = null;
+            editMode = false;
             redraw();
         }
     });
