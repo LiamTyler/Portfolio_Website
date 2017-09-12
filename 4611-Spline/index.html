@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Liam Tyler</title>
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css">
+    <script src="../scripts/jquery-3.2.1.js"></script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../portfolio.html">Portfolio</a></li>
+      </ul>
+    </nav>
+    <body>
+      <div id="projects">
+        <h1 class="centerText">Walk The Spline</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>A character follows a spline in a walking animation. The main part of this assignment was to implement the spline using cubic hermite interpolation and do heirarchical transformations on the bones. The motion capture and bone data/code was given to us, but we had to perform the correct transformations on the bones at each frame, according to where the character is on the spline. Each control point on the spline has a value and derivative, which control the direction and speed of the character.</p>
+        <h2>Code</h2>
+        <a target="_blank" href="https://github.com/LiamTyler/Walk-The-Spline">Go to Github page</a>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>Modern OpenGL 3 for drawing</li>
+          <li>SDL2 for the windowing and user input</li>
+          <li>Motion capture and bone data for the animations</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+          <li>Cubic Hermite Spline</li>
+          <li>Uses motion capture and bone data</li>
+          <li>Heirarchical transformations to get the bones of the body to move and rotate correctly</li>
+          <li>Adjustable camera</li>
+        </ul>
+        <h2>Images:</h2>
+        <div class="centerText">
+          <img class="capWidth" src="close.png">
+          <hr>
+          <img class="capWidth" src="mid-away.png">
+          <hr>
+          <img class="capWidth" src="mid-towards.png">
+          <hr>
+          <img class="capWidth" src="zoom.png">
+        </div>
+      </div>
+    </body>
+</html>
