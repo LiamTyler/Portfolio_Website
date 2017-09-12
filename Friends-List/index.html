@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Liam Tyler</title>
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css">
+    <script src="../scripts/jquery-3.2.1.js"></script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../portfolio.html">Portfolio</a></li>
+      </ul>
+    </nav>
+    <body>
+      <div id="projects">
+        <h1 class="centerText">Friends List</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>The goal of this project was to create a working friends list, as you would see in a game, or on Steam. It would be a small server-client app, where the client is the one requesting the server via TCP sockets to search for users, as well as add, remove, and invite them to games. The server must be able to store all of it's user data in a database. I used Postgres for this. The app currently only uses localhost, but it could easily be changed to do server/client. After reaching all my inital local goals I lost interest to take it any further. What I did make works though, and I learned a few things, so it was mostly a success.</p>
+        <h2>Code</h2>
+        <a target="_blank" href="https://github.com/LiamTyler/Friends_List">Go to Github page</a>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>Postgres backend using psycopg2</li>
+          <li>Used Lucidcharts to practice making some UML and ER diagrams for this</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+          <li>Add / remove users</li>
+          <li>Send / accept / reject / view friend requests</li>
+          <li>Add / remove friends</li>
+          <li>View friends list</li>
+          <li>Set online / in-game status</li>
+        </ul>
+      </div>
+    </body>
+</html>

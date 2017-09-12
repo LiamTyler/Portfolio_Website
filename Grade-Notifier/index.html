@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Liam Tyler</title>
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css">
+    <script src="../scripts/jquery-3.2.1.js"></script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../portfolio.html">Portfolio</a></li>
+      </ul>
+    </nav>
+    <body>
+      <div id="projects">
+        <h1 class="centerText">Grade Notifier</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>I got tired of checking my grades all the time, so I made a little python script to check them for me. It logs into Moodle where the grades are posted, downloads that webpage, and parses the grades out. If the grades are different than the last time it checked, it will send me an email notifying me about which grade changed and how.</p>
+        <h2>Code</h2>
+        <a target="_blank" href="https://github.com/LiamTyler/GradeNotifier">Go to Github page</a>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>SMTPlib for the emailing portion</li>
+          <li>Requests lib for the authenticating and webpage downloading</li>
+          <li>HTMLparser for parsing the page</li>
+          <li>Cron to check every 10 minutes</li>
+        </ul>
+      </div>
+    </body>
+</html>
