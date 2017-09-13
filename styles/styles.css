@@ -42,18 +42,36 @@ nav ul {
     background-color: #222;
 }
 nav ul li {
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.floating {
+    display: table;
     float: left;
+}
+.floating li {
+    display: table-cell;
+    vertical-align: middle;
 }
 nav ul li:hover {
     background-color: #0A0;
 }
 nav a {
     color: white;
-    text-align: center;
-    font-size: 24px;
-    padding: 14px 16px;
     text-decoration: none;
-    display: block;
+}
+#LT-header {
+    border-right: 5px solid #000;
+}
+#LT-header:hover {
+    background-color: #222;
+}
+#LT-header p {
+    font-size: .6em;
+    margin: 0;
 }
 h4 {
     margin: 0;
