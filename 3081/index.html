@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <?php include '../header.php';?>
+  </head>
+  <body>
+      <?php include '../navbar.php';?>
+      <div id="projects">
+        <h1 class="centerText">Photoshop</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>This was a semester long project, and we worked in teams of three. I was the project lead, and did the majority of the coding. We did it in three iterations. The first iteration was to implement some of the classic tools, like a pen, eraser, spray can, etc. The second iteration we had to implement different filters such as blur, edge detection, saturation, and more. We also had to add undo/redo, as well as png and jpeg loading and saving. For the third iteration, we had to turn our app into a library, and provide a command line interface. We also had to support the stacks of CT brain scan images and a way to edit all of those simultaneously. For each stage, we had to create a UML document and a design justification document.</p>
+        <h2>Extra</h2>
+        <p>I enjoyed this project a lot, so I added to the project unrelated to class. Some of the filters can take a long time to execute because each pixel has to at dozens of pixels surrounding it. I decided to make the application multi-threaded. I created a thread pool, and then would assign each thread a portion of the image to filter when necessary. It compiled and worked, but I actually only noticed about a 2x speed up. I never merged it in because I didn't want to add complexity for my teammates, but it was a fun experiment.</p>
+        <h2>Code</h2>
+        <a target="_blank" href="https://github.com/LiamTyler/Photoshop">Go to Github page</a>
+        <h2>Features</h2>
+        <ul>
+          <li>Tools: Pen, Eraser, Spray can, Calligraphy, Highlighter, Stamp, Blur, and Rainbow Pen</li>
+          <li>Adjustable tool color</li>
+          <li>Filters: Blur, MotionBlur, Sharpen, Edge Detect, Threshold, Emboss, Quantize, Channels, and Saturation.</li>
+          <li>PNG and JPEG loading and saving</li>
+          <li>Undo and Redo</li>
+          <li>Command Line Interface</li>
+          <li>Compilable into single library</li>
+          <li>Image stack processing</li>
+        </ul>
+        <h2>Images:</h2>
+        <div class="centerText">
+          <img class="capWidth" src="paint.png">
+          <hr>
+          <img class="capWidth" src="regular.png">
+          <hr>
+          <img class="capWidth" src="edge.png">
+          <hr>
+          <img class="capWidth" src="quantized.png">
+          <hr>
+          <img class="capWidth" src="inverted.png">
+          <hr>
+          <img class="capWidth" src="controls.png">
+        </div>
+      </div>
+    </body>
+</html>
