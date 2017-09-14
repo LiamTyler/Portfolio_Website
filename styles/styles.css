@@ -7,7 +7,10 @@ body {
 canvas {
     background-color: #FFF;
     border: 1px solid black;
-    margin: auto;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 600px;
     display: block;
 }
 

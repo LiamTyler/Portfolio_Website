@@ -312,8 +312,9 @@ $(document).ready(function() {
     timer = setInterval(animate, interval);
 
     $("#canvas").mousedown(function(e) {
-        var mouseX = e.pageX - this.offsetLeft;
-        var mouseY = e.pageY - this.offsetTop;
+        var rect = this.getBoundingClientRect();
+        var mouseX = (e.clientX - rect.left) * this.width / rect.width;
+        var mouseY = (e.clientY - rect.top) * this.height / rect.height;
         if (!editMode) {
             current_spline.addPoint(mouseX, mouseY);
             redraw();
@@ -344,8 +345,9 @@ $(document).ready(function() {
 
     $("#canvas").mousemove(function(e) {
         if (selectedPoint != null) {
-            var mouseX = e.pageX - this.offsetLeft;
-            var mouseY = e.pageY - this.offsetTop;
+            var rect = this.getBoundingClientRect();
+            var mouseX = (e.clientX - rect.left) * this.width / rect.width;
+            var mouseY = (e.clientY - rect.top) * this.height / rect.height;
             all_splines[selectedSpline].changePoint(selectedPoint, mouseX, mouseY);
             redraw();
         }
@@ -359,7 +361,7 @@ $(document).ready(function() {
     });
 
     $(window).keypress(function(e) {
-        if (e.which == 32) {
+        if (e.which == 78 || e.which == 110) {
             if (current_spline.points.length != 0) {
                 current_spline = new Spline();
                 all_splines.push(current_spline);
