@@ -1,28 +1,29 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <?php include '../../header.php';?>
+  <?php include '/header.php';?>
   </head>
   <body>
-      <?php include '../../navbar.php';?>
+      <?php include '/navbar.php';?>
       <div id="projects">
         <h1 class="centerText">Documentation Generator</h1>
         <hr>
         <h2>Description</h2>
-        <p></p>
+        <p>The team that I was a part of had their own specific coding style and conventions. It was different enough from standard styles where they couldn't really use doxygen or any other documentation generating tool, unless they wanted to go back and edit all of their comments and in-code documentation. They still wanted there to be one centralized place they could go to and see documentation for any of their projects though.</p>
+        <p>What I did was create a website that would do a 'git pull' on each of their projects, every 5 minutes. If there were any changes, for each file that needed documentation generated, it would call a custom parser that I had built. It would then generate an accordion style menu. You could navigate through it to any class or function. Once you clicked on a class or function, all of the documentation for that item would be neatly displayed.</p>
+        <p>This project was for the second half of my summer. Sadly I can't show the website or any of the code because it is Seagate's property.</p>
         <h2>Tools Used</h2>
         <ul>
-          <li></li>
+          <li>Django for the website and storing the documentation</li>
+          <li>Pure CSS for accordion menu</li>
+          <li>Python for the custom parser</li>
         </ul>
         <h2>Features</h2>
         <ul>
-          <li></li>
+          <li>Accordion menu</li>
+          <li>Self updating</li>
+          <li>Auto complete search bar for any function or class</li>
         </ul>
-        <h2>Images:</h2>
-        <div class="centerText">
-          <img class="capWidth" src="">
-          <hr>
-        </div>
       </div>
     </body>
 </html>

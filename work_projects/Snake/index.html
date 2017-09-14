@@ -1,28 +1,33 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <?php include '../../header.php';?>
+  <?php include '/header.php';?>
   </head>
   <body>
-      <?php include '../../navbar.php';?>
+      <?php include '/navbar.php';?>
       <div id="projects">
         <h1 class="centerText">Snake</h1>
         <hr>
         <h2>Description</h2>
-        <p></p>
+        <p>This lab is a spin off of the old arcade Snake game. The goal is to have a snake that goes around and eat fruit. When a fruit is eaten, the player gains points and the snake grows longer. Some of the fruit stays still, while some fruit moves around the screen. There is also an enemy 'SnakeFruit.' It acts like a snake as it tries to beat you to eating the fruit. It will grow longer and gain its own points, as well as speed the game up and make it harder for you play. However, it's also like a fruit, because if the player hits the head, it will be eaten like a fruit.</p>
+        <p>The students are given code that moves a snake around the screen, code to manage / draw on the screen, and the movement function for the enemy, but that's it. This lab focused on inheritance, so I have them do 4 steps: Make a Fruit class, make a MovingFruit class, make a parent Moveable class and refactor, and lastly build a SnakeFruit enemy class. I spent a long time designing it in a way where it focuses on the inheritance and concepts, rather than small frustrating details. I either designed the annoying parts out, or coded it for them. I provided a write up to guide them through each of their tasks.</p>
+        <h2>Why I made this</h2>
+        <p>As the lead TA for one semester, I was asked to spend an hour or two each week coming up with one or two new lab problems. For their last lab though, I really wanted to give them a fun lab for them to remember and enjoy. I spent about 30 hours of my own time on this, because I really wanted the students to enjoy it. Most of the students said that all of the labs had been boring and too math based. I wanted to give them something fun, and hopefully excite them about computer science, since that should be a goal for any introductory computer science class. The professor rejected the lab, but I hope to be able to use it in the future some day.</p>
         <h2>Code</h2>
         <a target="_blank" href="https://github.com/LiamTyler/Console_Snake">Go to Github page</a>
         <h2>Tools Used</h2>
         <ul>
-          <li></li>
-        </ul>
-        <h2>Features</h2>
-        <ul>
-          <li></li>
+          <li>Ncurses for the terminal graphics and keyboard handling</li>
         </ul>
         <h2>Images:</h2>
         <div class="centerText">
-          <img class="capWidth" src="">
+          <img class="capWidth" src="zoom.png">
+          <hr>
+          <img class="capWidth" src="full1.png">
+          <hr>
+          <img class="capWidth" src="full2.png">
+          <hr>
+          <img class="capWidth" src="full3.png">
           <hr>
         </div>
       </div>

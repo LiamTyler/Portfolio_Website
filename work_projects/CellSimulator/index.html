@@ -1,28 +1,34 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <?php include '../../header.php';?>
+  <?php include '/header.php';?>
   </head>
   <body>
-      <?php include '../../navbar.php';?>
+      <?php include '/navbar.php';?>
       <div id="projects">
         <h1 class="centerText">Cell Simulator</h1>
         <hr>
         <h2>Description</h2>
-        <p></p>
-        <h2>Code</h2>
-        <a target="_blank" href="https://github.com/LiamTyler/">Go to Github page</a>
-        <h2>Tools Used</h2>
+        <p>Some of the biologists here at the UMN are doing research on how cancer cells migrate throughout the body. They created a new motor-clutch model and wrote a 2D simulator for it in Matlab. The problem however, was that simulating 8 hours took about 17 hours in real life. They hired me to rewrite the code in C++ and speed it up.</p>
+        <h2>Results</h2>
+        <p>I got it to simulate 8 hours in about a half hour of real time. This was a ~30x speed up. This was a large enough speed up, that the focus switched to doing statistical analysis on the results to see if they matched what they published in their last paper. I created some tools in python to analyze the output of the simulator and output / graph the results. The other focus was to incorperate the 1D simulator that they had. I had to make the code very extensible so that it will be easy to change in the future, and so that it is easily extensible to 3D. Honestly, I think it could still be sped up a lot, but analysis and extensiblity were bigger priorities after the 30x speed up.</p>
+        <h2>What next</h2>
+        <p>This September I am doing directed research with Dr. Keefe, who is a computer graphics researcher here at the UMN. We are going to work on visualizing the data that the simulator generates. For example, the simulator uses a discrete event based model. One of the events is when a protrusion of the cell (essentially a cell arm) 'fails', and can no longer grab and pull itself in its direction. I want to use graphics to help visualize these events, and explore what leads up to a protrusion failure. One of the first ways we are going to explore is by creating a timeline for each cell. A failure event will be on the right side of the timeline, and you will be able to see all the events leading up to it. Ontop of that, there will be lining up thousands of cells on a common event / time axis, doing trend analysis on all of these, and being able to sort which groups of cells you are analyzing.</p>
+        <p>I'll be using this research and new visualization techniques as my honors thesis. I'll update when I actually have visuals to show.</p>
+        <h2>Paper</h2>
+        <a target="_blank" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5458120"/>Go to the research paper with this simulator</a>
+        <h2>Simulator Features</h2>
         <ul>
-          <li></li>
-        </ul>
-        <h2>Features</h2>
-        <ul>
-          <li></li>
+          <li>Can switch between 1D and 2D easily</li>
+          <li>Highly extensible, which will make adding 3D in the future much easier</li>
+          <li>Uses a GSL non-linear equation solver to do force balance on all of the cell arms</li>
+          <li>Can easily switch into testing framework, where you can load up the exact same random numbers into both the C++ and Matlab versions, and then directly compare their states after each event. I made sure my code lined up to the 14th decimal point after 10,000 events.</li>
+          <li>Modifible. The code is very well layed out, and changes are usually limited to a small portion of the code. This includes setting up new cell parameters and which outputs you want.</li>
         </ul>
         <h2>Images:</h2>
         <div class="centerText">
-          <img class="capWidth" src="">
+          <img class="capWidth" src="cell.png">
+          <p>*Image above gotten from the linked research paper. See paper for more information*</p>
           <hr>
         </div>
       </div>

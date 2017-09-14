@@ -1,28 +1,35 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <?php include '../../header.php';?>
+  <?php include '/header.php';?>
   </head>
   <body>
-      <?php include '../../navbar.php';?>
+      <?php include '/navbar.php';?>
       <div id="projects">
         <h1 class="centerText">Failure Analysis Website</h1>
         <hr>
         <h2>Description</h2>
-        <p></p>
+        <p>This was a website for other teams inside of Seagate to make analysis requests to my group. This website had been built by an intern the previous semester, but it needed updating. There wasn't really any styling, a few things were broken, and they wanted more functionality. I set up a coulpe meetings where I got the requirements from a couple different teams, and then spent the first half of the summer implementing them. See below for descriptions of the features I updated/added.</p>
+        <h2>Difficulties I had</h2>
+        <p>I had never done any website programming before this. So, to suddenly have to edit Django, HTML, CSS, and Javascript code, as well as Ansible files, was a lot for me to get used to. I had a mentor who I definitely asked many many questions to, but most of my learning was just from thousands of Google searches and looking at past Stack Overflow answers. It took a while for me to get it all wrapped around my head, but by the end of the summer I was the expert on anything related to that website.</p>
         <h2>Tools Used</h2>
         <ul>
-          <li></li>
+          <li>Django for the website</li>
+          <li>Ansible to update the server hosting the website</li>
         </ul>
-        <h2>Features</h2>
+        <h2>Portions I Updated</h2>
         <ul>
-          <li></li>
+          <li>Added styling and color for the whole website</li>
+          <li>For the tables that holded requests, I added extra search features</li>
+          <li>Fixed a long standing bug where nobody could be added as an admin to the website</li>
+          <li>Organization in general. The project was a bit of a hurried mess by the time I got there</li>
         </ul>
-        <h2>Images:</h2>
-        <div class="centerText">
-          <img class="capWidth" src="">
-          <hr>
-        </div>
+        <h2>Portions I Added From Scratch</h2>
+        <ul>
+          <li>Added Javascript code ontop of the Datatables library to implement frozen columns and scrolling</li>
+          <li>Created essentially a forum for people to post technical tips that they had discovered in the lab. They used to have this with Lotus Notes, but they lost it when they switched away from Lotus Notes years ago</li>
+          <li>Created a tool to add large batches of people to the website without having to manually do a 5 step process for each person</li>
+        </ul>
       </div>
     </body>
 </html>

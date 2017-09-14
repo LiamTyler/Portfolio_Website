@@ -1,28 +1,70 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <?php include '../../header.php';?>
+  <?php include '/header.php';?>
   </head>
   <body>
-      <?php include '../../navbar.php';?>
+      <?php include '/navbar.php';?>
       <div id="projects">
         <h1 class="centerText">Unit Testing</h1>
         <hr>
         <h2>Description</h2>
-        <p></p>
+        <p>Right at the end of a semester, I was asked by the professor who I was a teaching assistant for, to try to make a framework for testing student's code. I only had about a week to try and make this. I was also told that I could only be paid for 10 hours of work on this, but I still put about 30 hours into it.</p>
+        <p>This framework is currently only capable of testing IO and functions and right now, including int main(). It doesn't have the same support for classes yet. What it does though, is compiles the students code, and runs each test in a separate process, so if they crash, it's ok. It then returns a final summary of how many tests passed.</p>
         <h2>Code</h2>
-        <a target="_blank" href="https://github.com/LiamTyler/">Go to Github page</a>
-        <h2>Tools Used</h2>
-        <ul>
-          <li></li>
-        </ul>
+        <a target="_blank" href="https://github.com/LiamTyler/UnitTestingC">Go to Github page</a>
         <h2>Features</h2>
+        <h3>Testing</h3>
         <ul>
-          <li></li>
+          <li>Create a 'Tester' object, and give it the student's function that you wish to test</li>
+          <li>Add test cases to that Tester object by giving it the starting parameters, and what the return should be</li>
+          <li>If you are testing standard IO, you can also give a test cases the input string it needs, and a regex of what the output should be</li>
+          <li>Run all the tests, each in a separate process, so that crashes are fine</li>
+          <li>Get a finally summary for a Tester object, to see how many tests succeeded</li>
+        </ul>
+        <h3>Handling Student's Code</h3>
+        <ul>
+          <li>Create a 'Program' object that takes in the filename of the code you want to test</li>
+          <li>The Program object will create a new copy of that file with int main() renamed (as to not conflict with the main() from the tester's code) and add the necessary includes for dynamic linking</li>
+          <li>Will compile the code, or alert the user if it failed to compile</li>
+          <li>Once compiled, you can give it the name of a function you want, and it will return it</li>
+
+        </ul>
+        <h2>Example</h2>
+        <pre>
+        <code>
+Program student_prgm(&quot;students_code.cpp&quot;);
+if (!student_prgm.FullPrepare()) {
+    cout << &quot;Failed to compile and dynamically load student's code&quot; << endl;
+    exit(1);
+}
+
+// Get student's int main() function
+typedef int (*stu_main)(int, char**);
+stu_main f = (stu_main) student_prgm.GetFunction(&quot;student_main&quot;);
+
+// Create a tester object for that int main(). Lets say their code should
+// just allow the user to enter their name, and then print &quot;Hello, ____!&quot;
+// with their name in it.
+
+// IOTester<return_type, param 1 type, param 2 type>
+// iotester(test_name, test_function)
+IOTester<int, int, char**> iotester(&quot;Print name&quot;, f);
+// Now, set up test cases
+int test_argc = 0
+char** test_argv = nullptr;
+//                test_name, expected ret, input, output regex, arg 1, arg2
+iotester.AddTest(&quot;Bob's Test&quot;, 0, &quot;Bob&quot;, &quot;Hello, Bob!\\s+&quot;, test_argc, test_argv);
+iotester.AddTest(&quot;Sam Smiths's Test&quot;, 0, &quot;Sam Smith&quot;, &quot;Hello, Sam Smith!\\s+&quot;, test_argc, test_argv);
+iotester.RunAllTests();
+iotester.GetSummary(cout);
+        </code>
+        </pre>
         </ul>
         <h2>Images:</h2>
         <div class="centerText">
-          <img class="capWidth" src="">
+          <img class="capWidth" src="driver.png">
+          <p>A small example of testing a student's integer divide function</p>
           <hr>
         </div>
       </div>
