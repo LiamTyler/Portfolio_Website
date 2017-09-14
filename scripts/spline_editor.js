@@ -361,7 +361,7 @@ $(document).ready(function() {
     });
 
     $(window).keypress(function(e) {
-        if (e.which == 78 || e.which == 110) {
+        if (!editMode && (e.which == 78 || e.which == 110)) {
             if (current_spline.points.length != 0) {
                 current_spline = new Spline();
                 all_splines.push(current_spline);
