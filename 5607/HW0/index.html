@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <?php include '../../header.php';?>
+  </head>
+  <body>
+      <?php include '../../navbar.php';?>
+      <div id="projects">
+        <h1 class="centerText">Shape Manipulator</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>The goal of this assignment was primarly to get OpenGL and SDL2 compiled and running. Full points were given if you drew a single square that you could translate, scale, and rotate with your mouse. I ended up taking it a step further and doing a lot of extra things. See the features section for the details.</p>
+        <h2>Difficulties</h2>
+        <p>The main difficulties I ran into were using OpenGL by itself. I've used OpenGL before, but it's always been abstracted away into nice classes where I only have to know the concepts. This is the first time I have had to do all the nitty gritty things myself. We also haven't learned about most of this, so I had to look up a lot of things, like vaos, vbos, and how to do post-processing things like the edge detection. The edge detection was probably the most difficult. I did it by having one square that is textured as monalisa. I render that square / screen to a framebuffer, and then texture square #2 by sending the framebuffer's texture through a different fragment shader that I wrote to do the edge detection.</p>
+        <h2>Code</h2>
+        <a href="5607_hw0-master.zip" download>Download zip file of code</a>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>Modern OpenGL 3 for drawing and shading</li>
+          <li>SDL2 for the windowing and user input</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+          <li>Variable number of squares and triangles</li>
+          <li>Each object can be translated, scaled, and rotated</li>
+          <li>Each object can be textured</li>
+          <li>If an object is not textured, it turns green when translating, red when rotating, and purple when scaling</li>
+          <li>Edge detection shader (see monalisa square)</li>
+          <li>Animation (press spacebar to rotate monalisa)</li>
+          <li>Background change (press b)</li>
+          <li>Maintaining object shape and size when window is scaled</li>
+        </ul>
+        <h2>Images:</h2>
+        <div class="centerText">
+          <img class="capWidth" src="basic.png">
+          <hr>
+          <img class="capWidth" src="translate.png">
+          <hr>
+          <img class="capWidth" src="rotate.png">
+          <hr>
+          <img class="capWidth" src="scale.png">
+          <hr>
+          <img class="capWidth" src="mona.png">
+          <hr>
+          <img class="capWidth" src="monaRotated.png">
+          <hr>
+          <img class="capWidth" src="stretch.png">
+          <hr>
+          <img class="capWidth" src="background.png">
+        </div>
+      </div>
+    </body>
+</html>
