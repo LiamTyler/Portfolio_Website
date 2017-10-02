@@ -2,6 +2,7 @@
 <html>
   <head>
   <?php include '../../header.php';?>
+    <script type='text/javascript' src='resize.js'></script>
   </head>
   <body>
       <?php include '../../navbar.php';?>
@@ -44,7 +45,7 @@
           <img class="capWidth" src="noise.jpg">
           <p>Noise: ./a.out -input sample/millcity.jpg -noise .5 -output results/noise.jpg</p>
           <hr>
-          <img class="capWidth" src="crop.jpg">
+          <img class="capWidth scale" src="crop.jpg">
           <p>Crop: ./a.out -input sample/millcity.jpg -crop 450 300 200 120 -output results/crop.jpg</p>
           <hr>
           <img class="capWidth" src="extract.jpg">
@@ -95,13 +96,13 @@
           <img class="capWidth" src="rotate.jpg">
           <p>Rotate 35 clockwise: ./a.out -input sample/millcity.jpg -rotate 35 -output results/rotate.jpg</p>
           <hr>
-          <img class="capWidth" src="scale0.jpg">
+          <img class="capWidth scale" src="scale0.jpg">
           <p>Scale (nearest neighbor sampling): ./a.out -input sample/millcity.jpg -sampling 0 -scale .2 .2 -output results/scale0.jpg</p>
           <hr>
-          <img class="capWidth" src="scale1.jpg">
+          <img class="capWidth scale" src="scale1.jpg">
           <p>Scale (bi-linear sampling): ./a.out -input sample/millcity.jpg -sampling 1 -scale .2 .2 -output results/scale1.jpg</p>
           <hr>
-          <img class="capWidth" src="scale2.jpg">
+          <img class="capWidth scale" src="scale2.jpg">
           <p>Scale (gaussian sampling): ./a.out -input sample/millcity.jpg -sampling 2 -scale .2 .2 -output results/scale2.jpg</p>
           <hr>
           <img class="capWidth" src="fisheye.jpg">
@@ -109,6 +110,5 @@
           <hr>
         </div>
       </div>
-      <script type='text/javascript' src='resize.js'></script>
     </body>
 </html>

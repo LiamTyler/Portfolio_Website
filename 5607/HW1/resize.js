@@ -1,5 +1,17 @@
 $(document).ready(function() {
-    $(window).resize(function() {
-        console.log("new width: " + $(window).width().toString());
+    var w = $("#original").width();
+    var h = $("#original").height();
+    $(".scale").each(function(){
+        $(this).width(w);
+        $(this).height(h);
+    });
+});
+
+$(window).bind("resize", function() {
+    var w = $("#original").width();
+    var h = $("#original").height();
+    $(".scale").each(function(){
+        $(this).width(w);
+        $(this).height(h);
     });
 });
