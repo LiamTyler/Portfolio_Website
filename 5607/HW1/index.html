@@ -35,7 +35,7 @@
         </ul>
         <h2>Images:</h2>
         <div class="centerText">
-          <img class="capWidth" src="millcity.jpg">
+          <img id="original" class="capWidth" src="millcity.jpg">
           <p>Original Image</p>
           <hr>
           <img class="capWidth" src="brightness.jpg">
@@ -71,7 +71,7 @@
           <img class="capWidth" src="blur17.jpg">
           <p>Blur (high): ./a.out -input sample/millcity.jpg -blur 17 -output results/blur17.jpg</p>
           <hr>
-          <img class="capWidth" src="sharpen5">
+          <img class="capWidth" src="sharpen5.jpg">
           <p>Sharpen (low): ./a.out -input sample/millcity.jpg -sharpen 5 -output results/sharpen5.jpg</p>
           <hr>
           <img class="capWidth" src="sharpen17.jpg">
@@ -95,9 +95,6 @@
           <img class="capWidth" src="rotate.jpg">
           <p>Rotate 35 clockwise: ./a.out -input sample/millcity.jpg -rotate 35 -output results/rotate.jpg</p>
           <hr>
-          <img class="capWidth" src="rotate.jpg">
-          <p>Rotate 35 clockwise: ./a.out -input sample/millcity.jpg -rotate 35 -output results/rotate.jpg</p>
-          <hr>
           <img class="capWidth" src="scale0.jpg">
           <p>Scale (nearest neighbor sampling): ./a.out -input sample/millcity.jpg -sampling 0 -scale .2 .2 -output results/scale0.jpg</p>
           <hr>
@@ -112,5 +109,6 @@
           <hr>
         </div>
       </div>
+      <script type='text/javascript' src='resize.js'></script>
     </body>
 </html>
