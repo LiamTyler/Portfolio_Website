@@ -9,18 +9,106 @@
         <h1 class="centerText">Image Processing</h1>
         <hr>
         <h2>Description</h2>
-        <p></p>
+        <p>This was the second homework assignment in this class. It is a command line tool that takes in an image, and can do various image processing features to it. The command line parsing code and image loading/saving was given to us, but we had to implement all of the filters ourselves.</p>
         <h2>Difficulties</h2>
-        <p></p>
+        <p>The main difficulties I had were figuring out how some of the filters worked. The ones that gave me the most trouble were probably contrast, rotate, and fish eye lens. The contrast took me a tiny bit to think of how it would work, but it was easy to implement after that. Rotate was the exact opposite, since I kept having small problems with sampling backwards. The fish eye lens was difficult both ways. I had no idea how they were normally done, so I tried viewing it as an image (2D rectangle) being wrapped onto a sphere. To do the filter, I had to figure out the math to 'unwrap' a sphere using spherical coordinates. It works okay, but the the edges of the images are very distorted. It's expected, but probably more distorted than I think looks the best.</p>
         <h2>Code</h2>
-        <a href="" download>Download zip file of code</a>
+        <a href="5607_hw1-master.zip" download>Download zip file of code</a>
         <h2>Features</h2>
         <ul>
-          <li></li>
+          <li>Brighten</li>
+          <li>Randon Noise</li>
+          <li>Crop</li>
+          <li>Extract Channel</li>
+          <li>Contrast</li>
+          <li>Saturation</li>
+          <li>Blur</li>
+          <li>Sharpen</li>
+          <li>Edge Detect</li>
+          <li>Quantize</li>
+          <li>Random Dither</li>
+          <li>Ordered Dither</li>
+          <li>Floyd Steinberg Dither</li>
+          <li>Scale</li>
+          <li>Rotate</li>
+          <li>Fish Eye Lens</li>
         </ul>
         <h2>Images:</h2>
         <div class="centerText">
-          <img class="capWidth" src="">
+          <img class="capWidth" src="millcity.jpg">
+          <p>Original Image</p>
+          <hr>
+          <img class="capWidth" src="brightness.jpg">
+          <p>Brighten: ./a.out -input sample/millcity.jpg -brightness 2 -output results/brightness.jpg</p>
+          <hr>
+          <img class="capWidth" src="noise.jpg">
+          <p>Noise: ./a.out -input sample/millcity.jpg -noise .5 -output results/noise.jpg</p>
+          <hr>
+          <img class="capWidth" src="crop.jpg">
+          <p>Crop: ./a.out -input sample/millcity.jpg -crop 450 300 200 120 -output results/crop.jpg</p>
+          <hr>
+          <img class="capWidth" src="extract.jpg">
+          <p>Extract Channel: ./a.out -input sample/millcity.jpg -extract Channel 1 -output results/extract.jpg</p>
+          <hr>
+          <img class="capWidth" src="contrastL.jpg">
+          <p>Contrast (half): ./a.out -input sample/millcity.jpg -contrast .5 -output results/contrastL.jpg</p>
+          <hr>
+          <img class="capWidth" src="contrastH.jpg">
+          <p>Contrast (double): ./a.out -input sample/millcity.jpg -contrast 2 -output results/contrastH.jpg</p>
+          <hr>
+          <img class="capWidth" src="saturate0.jpg">
+          <p>Saturate (zero): ./a.out -input sample/millcity.jpg -saturation 0 -output results/saturate0.jpg</p>
+          <hr>
+          <img class="capWidth" src="saturate2.jpg">
+          <p>Saturate (double): ./a.out -input sample/millcity.jpg -saturation 2 -output results/saturate2.jpg</p>
+          <hr>
+          <img class="capWidth" src="saturate-1.jpg">
+          <p>Saturate (-1): ./a.out -input sample/millcity.jpg -saturation -1 -output results/saturate-1.jpg</p>
+          <hr>
+          <img class="capWidth" src="blur5.jpg">
+          <p>Blur (low): ./a.out -input sample/millcity.jpg -blur 5 -output results/blur5.jpg</p>
+          <hr>
+          <img class="capWidth" src="blur17.jpg">
+          <p>Blur (high): ./a.out -input sample/millcity.jpg -blur 17 -output results/blur17.jpg</p>
+          <hr>
+          <img class="capWidth" src="sharpen5">
+          <p>Sharpen (low): ./a.out -input sample/millcity.jpg -sharpen 5 -output results/sharpen5.jpg</p>
+          <hr>
+          <img class="capWidth" src="sharpen17.jpg">
+          <p>Sharpen (high): ./a.out -input sample/millcity.jpg -sharpen 17 -output results/sharpen17.jpg</p>
+          <hr>
+          <img class="capWidth" src="edge.jpg">
+          <p>Edge Detection: ./a.out -input sample/millcity.jpg -edgeDetect -output results/edge.jpg</p>
+          <hr>
+          <img class="capWidth" src="quantize2.jpg">
+          <p>Quantize: ./a.out -input sample/millcity.jpg -quantize 2 -output results/quantize.jpg</p>
+          <hr>
+          <img class="capWidth" src="rd2.jpg">
+          <p>Random Dither: ./a.out -input sample/millcity.jpg -randomDither 2 -output results/rd2.jpg</p>
+          <hr>
+          <img class="capWidth" src="od2.jpg">
+          <p>Ordered Dither: ./a.out -input sample/millcity.jpg -orderedDither 2 -output results/od2.jpg</p>
+          <hr>
+          <img class="capWidth" src="fsd2.jpg">
+          <p>Floyd-Steinberg Dither: ./a.out -input sample/millcity.jpg -FloydSteinbergDither 2 -output results/fsd2.jpg</p>
+          <hr>
+          <img class="capWidth" src="rotate.jpg">
+          <p>Rotate 35 clockwise: ./a.out -input sample/millcity.jpg -rotate 35 -output results/rotate.jpg</p>
+          <hr>
+          <img class="capWidth" src="rotate.jpg">
+          <p>Rotate 35 clockwise: ./a.out -input sample/millcity.jpg -rotate 35 -output results/rotate.jpg</p>
+          <hr>
+          <img class="capWidth" src="scale0.jpg">
+          <p>Scale (nearest neighbor sampling): ./a.out -input sample/millcity.jpg -sampling 0 -scale .2 .2 -output results/scale0.jpg</p>
+          <hr>
+          <img class="capWidth" src="scale1.jpg">
+          <p>Scale (bi-linear sampling): ./a.out -input sample/millcity.jpg -sampling 1 -scale .2 .2 -output results/scale1.jpg</p>
+          <hr>
+          <img class="capWidth" src="scale2.jpg">
+          <p>Scale (gaussian sampling): ./a.out -input sample/millcity.jpg -sampling 2 -scale .2 .2 -output results/scale2.jpg</p>
+          <hr>
+          <img class="capWidth" src="fisheye.jpg">
+          <p>Fish Eye Lens: ./a.out -input sample/millcity.jpg -fun -output results/fisheye.jpg</p>
           <hr>
         </div>
       </div>
