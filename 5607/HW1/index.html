@@ -12,7 +12,7 @@
         <h2>Description</h2>
         <p>This was the second homework assignment in this class. It is a command line tool that takes in an image, and can do various image processing features to it. The command line parsing code and image loading/saving was given to us, but we had to implement all of the filters ourselves.</p>
         <h2>Difficulties</h2>
-        <p>The main difficulties I had were figuring out how some of the filters worked. The ones that gave me the most trouble were probably contrast, rotate, and fish eye lens. The contrast took me a tiny bit to think of how it would work, but it was easy to implement after that. Rotate was the exact opposite, since I kept having small problems with sampling backwards. The fish eye lens was difficult both ways. I had no idea how they were normally done, so I tried viewing it as an image (2D rectangle) being wrapped onto a sphere. To do the filter, I had to figure out the math to 'unwrap' a sphere using spherical coordinates. It works okay, but the the edges of the images are very distorted. It's expected, but probably more distorted than I think looks the best.</p>
+        <p>The main difficulties I had were figuring out how some of the filters worked. The ones that gave me the most trouble were probably contrast, rotate, and fish eye lens. The contrast took me a tiny bit to think of how it would work, but it was easy to implement after that. Rotate was the exact opposite, since I kept having small problems with sampling backwards. The fish eye lens was difficult both ways. I had no idea how they were normally done, so I tried viewing it as an image (2D rectangle) being wrapped onto a sphere. To do the filter, I had to figure out the math to 'unwrap' a sphere using spherical coordinates. It works okay, but the the edges of the images are very distorted. It's expected, but probably more distorted than I think looks the best. Lastly, I also tried to implement a stained glass filter. I only thought of this a few hours before it was due, so I didn't have time to figure out an algorithm for creating random polygons of 4-8 sides as the stained pieces, so I just used a grid of squares.</p>
         <h2>Code</h2>
         <a href="5607_hw1-master.zip" download>Download zip file of code</a>
         <h2>Features</h2>
@@ -33,6 +33,7 @@
           <li>Scale</li>
           <li>Rotate</li>
           <li>Fish Eye Lens</li>
+          <li>Stained Glass</li>
         </ul>
         <h2>Images:</h2>
         <div class="centerText">
@@ -107,6 +108,18 @@
           <hr>
           <img class="capWidth" src="fisheye.jpg">
           <p>Fish Eye Lens: ./a.out -input sample/millcity.jpg -fun -output results/fisheye.jpg</p>
+          <hr>
+          <img class="capWidth" src="stainedMill.jpg">
+          <p>Stained Glass (medium sized squares): ./a.out -input sample/millcity.jpg -stainedGlass 8 -output results/stainedMill.jpg</p>
+          <hr>
+        </div>
+        <h2>Artistic Submission:</h2>
+        <div class="centerText">
+          <img class="capWidth scale" src="birb.jpg">
+          <p>Original Image</p>
+          <hr>
+          <img class="capWidth scale" src="stainedBirb.jpg">
+          <p>Stained Glass (medium sized squares): ./a.out -input sample/birb.jpg -stainedGlass 10 -output results/stainedBirb.jpg</p>
           <hr>
         </div>
       </div>
