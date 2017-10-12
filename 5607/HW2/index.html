@@ -14,29 +14,36 @@
         <p>The main two difficulties I had were in getting the shadows to work properly, and creating the GUI. The shadows for me were tricky because there was a lot of little details that you could screw up. For instance, I didnt realize that when solving for the intersection of a ray and a sphere, you need to check for negative t values that it calculates, even if you know the ray is already ahead of the sphere. The GUI was a challenge to link together the NanoGUI library and get OpenGL to properly load and render the texture.</p>
         <h2>Code</h2>
         <a href="5607_hw2-master.zip" download>Download zip file of code</a>
+        <h2>Installation / Usage</h2>
+        <p>Please see the README.md file on the github repository <a href="https://github.com/LiamTyler/5607_hw2">HERE</a> (or in the downloaded repository) for more info on how to install and usage.</p>
+        <a href="5607_hw2-master.zip" download>Download zip file of code</a>
         <h2>Tools Used</h2>
         <ul>
           <li>Nanogui library for the UI components</li>
           <li>stbi_image for reading and writing images</li>
           <li>OpenGL for showing the result image in a texture</li>
         </ul>
-        <h2>Supported Features</h2>
+        <h2>Required Features (All implemented)</h2>
         <ul>
           <li>Shading Model: Phong</li>
-          <li>Shadows</li>
           <li>Objects: Spheres</li>
           <li>Materials: Ambient, diffuse, and specular properties</li>
           <li>Lighting: Ambient and Point</li>
-          <li>Graphical User Interface for loading scenes, rendering scenes, and viewing the resulting images</li>
           <li>Scene Creation: Camera placement, resolution, aspect ratio, object placement and properties</li>
-          <li>Support for BMP or PNG output</li>
+          <li>Basic Sampling</a>
         </ul>
-        <h2>Extra Features</h2>
-        <p>The features I attempted that were not required were:</p>
+        <h2>Extra Features that I finished</h2>
         <ul>
-          <li>UI + OpenGL</li>
+          <li>Graphical User Interface for loading scenes, rendering scenes, and viewing the resulting images</li>
           <li>BMP or PNG output</li>
           <li>Shadows</li>
+          <li>Jittered supersampling</li>
+          <li>Adaptive sampling</li>
+          <li>Refraction</li>
+          <li>Reflection</li>
+          <li>Multiple light sources</li>
+          <li>Directional lights</li>
+          <li>Spot lights</li>
         </ul>
         <h2>Images:</h2>
         <div class="centerText">
