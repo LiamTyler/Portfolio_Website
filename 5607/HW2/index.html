@@ -11,12 +11,11 @@
         <h2>Description</h2>
         <p>This project is on using ray tracing to render various scenes. The user provides a scene detailing everything in it. This ray tracer works in 3 steps: Shoot a ray through each pixel, see if that ray intersects and spheres, and calculate the lighthing model for that pixel. I created a GUI to help users load scenes, and run the ray tracer. Currently there it is more of a ray caster, not a ray tracer, since there is no reflection or refraction.</p>
         <h2>Difficulties</h2>
-        <p>The main two difficulties I had were in getting the shadows to work properly, and creating the GUI. The shadows for me were tricky because there was a lot of little details that you could screw up. For instance, I didnt realize that when solving for the intersection of a ray and a sphere, you need to check for negative t values that it calculates, even if you know the ray is already ahead of the sphere. The GUI was a challenge to link together the NanoGUI library and get OpenGL to properly load and render the texture.</p>
+        <p>The main two difficulties I had were in getting the shadows to work properly, and creating the GUI. The shadows for me were tricky because there was a lot of little details that you could screw up. For instance, I didnt realize that when solving for the intersection of a ray and a sphere, you need to check for negative t values that it calculates, even if you know the ray is already ahead of the sphere. The GUI was a challenge to link together the NanoGUI library and get OpenGL to properly load and render the texture. I also had to play around (i.e, fight) with nanogui a lot to get the buttons to synch and resizing events to work.</p>
         <h2>Code</h2>
         <a href="5607_hw2-master.zip" download>Download zip file of code</a>
         <h2>Installation / Usage</h2>
         <p>Please see the README.md file on the github repository <a href="https://github.com/LiamTyler/5607_hw2">HERE</a> (or in the downloaded repository) for more info on how to install and usage.</p>
-        <a href="5607_hw2-master.zip" download>Download zip file of code</a>
         <h2>Tools Used</h2>
         <ul>
           <li>Nanogui library for the UI components</li>
@@ -39,20 +38,47 @@
           <li>Shadows</li>
           <li>Jittered supersampling</li>
           <li>Adaptive sampling</li>
-          <li>Refraction</li>
-          <li>Reflection</li>
+          <li>Refraction (not 100% sure this is working)</li>
+          <li>Reflection (not 100% sure this is working)</li>
           <li>Multiple light sources</li>
           <li>Directional lights</li>
           <li>Spot lights</li>
         </ul>
         <h2>Images:</h2>
         <div class="centerText">
+          <img class="capWidth" src="gui_intial.png">
+          <p>The initial GUI screen</p>
+          <hr>
+          <img class="capWidth" src="gui_final.png">
+          <p>The final GUI screen after ray tracing</p>
+          <hr>
+          <img class="capWidth" src="gui_control.png">
+          <p>The GUI control box</p>
+          <hr>
+          <img class="capWidth" src="gui_image.png">
+          <p>The GUI image window. Scene: bear.scn</p>
+          <hr>
+          <img class="capWidth" src="diffuse0.png">
+          <p>Basic sampling of diffuse spheres. Scene: spheres_no_spec.scn</p>
+          <hr>
+          <img class="capWidth" src="diffuse1.png">
+          <p>Jittered super sampling of diffuse spheres</p>
+          <hr>
+          <img class="capWidth" src="diffuse2.png">
+          <p>Adaptive super sampling of diffuse spheres</p>
+          <hr>
+          <img class="capWidth" src="see_through.png">
+          <p>A perfectly reflective sphere (mostly white due to white background). Scene: scene2.scn</p>
+          <hr>
+          <img class="capWidth" src=".png">
+          <p>An example of the spotlight. Scene: spotlight.scn</p>
+          <hr>
           <img class="capWidth" src="one_sphere.bmp">
-          <p>Scene: cameraSceneTest.scn</p>
+          <p>Scene: an old cameraSceneTest.scn with no reflection/refraction</p>
           <hr>
           <strong>Artistic Submission:</strong>
           <img class="capWidth" src="four_spheres.png">
-          <p>Scene: scene2.scn</p>
+          <p>Scene: an old scene2.scn with no reflection/refraction</p>
           <hr>
         </div>
       </div>
