@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <?php include '../../header.php';?>
+  </head>
+  <body>
+      <?php include '../../navbar.php';?>
+      <div id="projects">
+        <h1 class="centerText">Ray Tracer</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>This was the second part to the ray tracing homework. For the first part, see 'HW2: Ray Casting/Tracing' <a href="../HW2/index.html">here</a>. This second part was to take it another step by adding features like refraction, reflection, parallelization, support for triangles, and more. See the features below for the full list.</p>
+        <h2>Difficulties</h2>
+        <p>The main difficulties I had were with refraction and the bounding volume heirarchy (BVH). I spent hours upon hours debugging them, wondering why they weren't working. Refraction wasn't occurring, and the BVH was making the code run slower. It turned out that both times it was just tiny mistakes in the ray/sphere and ray/bounding box intersection tests. Conceptually, everything made sense though.</p>
+        <h2>Code</h2>
+        <a href="5607_hw2-master.zip" download>Download zip file of code</a>
+        <h2>Installation / Usage</h2>
+        <p>Please see the README.md file on the github repository <a href="https://github.com/LiamTyler/5607_hw2">HERE</a> (or in the downloaded repository) for more info on how to install and usage.</p>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>Nanogui library for the UI components</li>
+          <li>stbi_image for reading and writing images</li>
+          <li>OpenGL for showing the result image in a texture</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+          <li>Shading Model: Phong</li>
+          <li>Objects: Spheres, triangles, normal triangles</li>
+          <li>Materials: Ambient, diffuse, specular, and transmissive properties</li>
+          <li>Lighting: Ambient, point, directional, and spot. Multiple lights supported</li>
+          </li>Relfection and refraction (with specified recursion depth)</li>
+          <li>BMP or PNG output</li>
+          <li>Shadows</li>
+          <li>Scene Creation: Camera placement, resolution, aspect ratio, object placement and properties</li>
+          <h4>Extra</h4>
+          <li>Parallelization: OpenMP dynamic scheduling</li>
+          <li>Spherical environment mapping</li>
+          <li>Axis aligned bounding box tree for intersection tests</li>
+          <li>Sampling: basic, adaptive super, and jittered super</li>
+          <li>Graphical User Interface for loading scenes, rendering scenes, and viewing the resulting images</li>
+        </ul>
+        <h2>Images:</h2>
+        <div class="centerText">
+          <strong>Artistic Submission:</strong>
+          <img class="capWidth" src="env.png">
+          <p>Scene: env.scn. Shows the environment mapping in action, and a mirrored sphere</p>
+          <hr>
+          <img class="capWidth" src="triangle.bmp">
+          <p>Scene: triangle.scn. Shows the interpolation of triangle normals working correctly</p>
+          <hr>
+          <img class="capWidth" src="arm-top.bmp">
+          <p>Scene: arm-top.scn. Further illustrates the smooth interpolation of the triangle normals</p>
+          <hr>
+          <img class="capWidth" src="gear.bmp">
+          <p>Scene: gears.scn</p>
+          <hr>
+          <img class="capWidth" src="dragon.bmp">
+          <p>Scene: dragon.scn</p>
+          <hr>
+          <img class="capWidth" src="spheres2.bmp">
+          <p>Scene: spheres2.scn. Shows the refraction/reflection off</p>
+          <hr>
+          <img class="capWidth" src="spheres1.bmp">
+          <p>Scene: spheres1.scn</p>
+          <hr>
+          <img class="capWidth" src="foo.bmp">
+          <p>Scene: test_reasonable.scn</p>
+          <hr>
+        </div>
+      </div>
+    </body>
+</html>
