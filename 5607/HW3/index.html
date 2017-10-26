@@ -39,6 +39,19 @@
           <li>Sampling: basic, adaptive super, and jittered super</li>
           <li>Graphical User Interface for loading scenes, rendering scenes, and viewing the resulting images</li>
         </ul>
+        <h2>Speed Analysis</h2>
+            <p>I did two things to help speed the rendering up: using OpenMP, and creating a BVH. To see how those actually affected the performance, I traced three different scenes (dragon, arm-top, spheres2), and recorded how long it took to render the images in the 4 different cases. Below are some of the results:</p>
+        <div class="centerText">
+          <img class="capWidth" src="ompVSnoomp.png">
+          <p>Scenes rendered using OpenMP compared to the same scenes without OpenMP</p>
+          <hr>
+          <img class="capWidth" src="bvhVSnobvh.png">
+          <p>Scenes rendered using a BVH compared to the same scenes without any BVH</p>
+          <hr>
+        </div>
+        <h3>Summary</h3>
+        <p>Looking at the OpenMP vs no OpenMP graphs, we see that we usually gain a 4-5 times speed up in all scenes. Looking at the BVH graph however, we see different results. With the dragon and arm scenes, there was about a 160 times speed up. With the spheres scene however, it actually slowed down by 40%, even though it was still fast. The reason for this is that the dragon and arm scenes have thousands of triangles, so it is very beneficial to not have to do thousands of comparisons for each ray. Using a BVH gives us logarithmic number of comparisons. With the spheres file however, there are only a dozen or so spheres. It doesn't take long to check a dozen objects, and actually the overhead of checking bounding boxes can make it slower than just directly checking the spheres. In addition to that, the dragon and arm scenes are mostly empty, which is when the bounding box checks are most helpful.</p>
+
         <h2>Images:</h2>
         <div class="centerText">
           <strong>Artistic Submission:</strong>
