@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <?php include '../../header.php';?>
+  </head>
+  <body>
+      <?php include '../../navbar.php';?>
+      <div id="projects">
+        <h1 class="centerText">Real Time OpenGL</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>The goal of this assignment was to learn how to do real time 3D rendering with OpenGL. The result was a small dungeon crawler-like game, where you move your character through the dungeon, pick up keys, and open doors to get to the final room and win. See the features and pictures below for more.</p>
+        <h2>Difficulties</h2>
+        <p>The hardest part was just figuring out how to do things in OpenGL. The actual game logic and parsing the map were both simple. For the shaders, I have written Blinn-Phong shaders before, so that wasn't too bad. It was just figuring out how to store everything and interact with OpenGL, and debug mysterious segmentation faults.</p>
+        <h2>Code</h2>
+        <a href="5607_hw4-master.zip" download>Download zip file of code</a>
+        <h2>Installation / Usage</h2>
+        <p>Please see the README.md file on the github repository <a href="https://github.com/LiamTyler/5607_hw4">HERE</a> (or in the downloaded repository) for more info on how to install and usage.</p>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>OpenGL for all of the rendering.</li>
+          <li>SDL2 for the window management, as well as for the keyboard and mouse interaction.</li>
+          <li>Blender to create the key models.</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+          <li>Camera follows the character's position to give a first person perspective.</li>
+          <li>Move character with W,A,S,D, and turn head with the mouse.</li>
+          <li>Texturing the walls and doors.</li>
+          <li>Blinn-Phong shading.</li>
+          <li>OBJ model loading and rendering (the keys).</li>
+          <li>Supports variable number of point lights.</li>
+          <li>Player can grab the keys (with 'e') and open the matching colored doors.</li>
+          <li>Door opening is animated.</li>
+          <li>When player reaches final room, screen fades to white to signal win.</li>
+        </ul>
+        <h2>Images:</h2>
+        <p>Note: My screenshot taker inverts some of the colors, but its mostly the same.</p>
+        <div class="centerText">
+          <img class="capWidth" src="doors1.png">
+          <p>First two doors of five.</p>
+          <hr>
+          <img class="capWidth" src="doors2.png">
+          <p>Other three doors in the map.</p>
+          <hr>
+          <img class="capWidth" src="key.png">
+          <p>Close up of one of the key model.</p>
+          <hr>
+          <img class="capWidth" src="carry_key.png">
+          <p>Player carries key infront of him no matter which way the camera is turned.</p>
+          <hr>
+          <img class="capWidth" src="door_opening.png">
+          <p>Door raises when you open it.</p>
+          <hr>
+          <img class="capWidth" src="door_opened.png">
+          <p>Door fully opened and the next key in the unlocked room.</p>
+          <hr>
+          <img class="capWidth" src="win.png">
+          <p>The screen fading to white once the player wins by opening and entering the final room.</p>
+          <hr>
+          <img class="capWidth" src="room.png">
+          <p>The rest of the map, facing away from the doors.</p>
+          <hr>
+        </div>
+      </div>
+    </body>
+</html>
