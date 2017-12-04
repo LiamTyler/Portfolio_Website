@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <?php include '../../header.php';?>
+  </head>
+  <body>
+      <?php include '../../navbar.php';?>
+      <div id="projects">
+        <h1 class="centerText">Real Time VR Ray Tracing</h1>
+        <hr>
+        <h2>Description</h2>
+        <p></p>
+        <h2>Difficulties</h2>
+        <p></p>
+        <h2>Code</h2>
+        <a href="https://github.com/LiamTyler/Real-Time-VR-Ray-Tracing">Link to the github repository</a>
+        <h2>Installation / Usage</h2>
+        <p>Please see the README.md file on the github repository for more info on how to install and usage.</p>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>OpenGL's compute shader to do the ray tracing</li>
+          <li>MinVR to handle getting the correct view and projection matrices, and the drawing outputted texture. It handles whether the program is being run on a desktop, VIVE, or Cave</li>
+          <li>CMake to build the project</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+            <h3>Ray Tracer</h3>
+            <ul>
+                <li>Supported shapes: spheres.</li>
+                <li>Supported types of lights: point, and directional.</li>
+                <li>Supports variable number of lights.</li>
+                <li>Phong Shading (ambient, diffuse, and specular components).</li>
+                <li>Variable camera position, direction, and resolution.</li>
+            </ul>
+            <h3>VR and Controls</h3>
+            <ul>
+                <li>Supported Systems: Linux and Windows</li>
+                <li>Supported devices: Desktop, VIVE, and Cave</li>
+                <li>Can move character through the scene and change camera orientation</li>
+            </ul>
+        </ul>
+        <h2>Images:</h2>
+        <div class="centerText">
+          <img class="capWidth" src="">
+          <p>Simple scene of one sphere. Running in the Cave.</p>
+          <hr>
+        </div>
+      </div>
+    </body>
+</html>
