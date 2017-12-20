@@ -1,50 +1,88 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-  <?php include '../../header.php';?>
-  </head>
-  <body>
-      <?php include '../../navbar.php';?>
-      <div id="projects">
-        <h1 class="centerText">Real Time VR Ray Tracing</h1>
-        <hr>
-        <h2>Description</h2>
-        <p>The final project for this class was open ended. I chose real time ray tracing in VR as my final project. The idea is to be able to have a static scene that is rendered in real time using ray tracing. The user will be able to then move around the scene and turn their head / camera in any direction. The ray tracing is done on the GPU using OpenGL's compute shaders. The compute shader outputs a texture which is the image for that frame. That texture then just gets rendered onto a quad as normal. The key thing is to make it fast enough to run in real time.</p>
-        <h2>Difficulties</h2>
-        <p>So far, my main difficulties have just been having to learn so many new things. Before this project, I had never: used the cave, used the vive, used minvr, used compute shaders, used cmake, or used visual studio. One of those things isn't to bad by itself to learn, but having to learn all of them at the same time has been a challenge. The other difficulty is making it fast enough to be done in real time. There is a reason video games are not rendered using ray tracing. It's too slow. My goal is that by making the scene static however, I can have it be fast enough to be real time.</p>
-        <h2>Code</h2>
-        <a href="https://github.com/LiamTyler/Real-Time-VR-Ray-Tracing">Link to the github repository</a>
-        <h2>Installation / Usage</h2>
-        <p>Please see the README.md file on the github repository for more info on how to install and usage.</p>
-        <h2>Tools Used</h2>
-        <ul>
-          <li>OpenGL's compute shader to do the ray tracing</li>
-          <li>MinVR to handle getting the correct view and projection matrices, and the drawing outputted texture. It handles whether the program is being run on a desktop, VIVE, or Cave</li>
-          <li>CMake to build the project</li>
-        </ul>
-        <h2>Features</h2>
-        <ul>
-            <h3>Ray Tracer</h3>
-            <ul>
-                <li>Supported shapes: spheres.</li>
-                <li>Supported types of lights: point, and directional.</li>
-                <li>Supports variable number of lights.</li>
-                <li>Phong Shading (ambient, diffuse, and specular components).</li>
-                <li>Variable camera position, direction, and resolution.</li>
-            </ul>
-            <h3>VR and Controls</h3>
-            <ul>
-                <li>Supported Systems: Linux and Windows</li>
-                <li>Supported devices: Desktop, VIVE, and Cave</li>
-                <li>Can move character through the scene and change camera orientation</li>
-            </ul>
-        </ul>
-        <h2>Images:</h2>
-        <div class="centerText">
-          <img class="capWidth" src="sphere_in_cave.jpg">
-          <p>Simple scene of one sphere. Running in the Cave.</p>
-          <hr>
-        </div>
-      </div>
-    </body>
+	<head>
+		<?php include '../../header.php';?>
+	</head>
+	<body>
+		<?php include '../../navbar.php';?>
+		<div id="projects">
+			<h1 class="centerText">Real Time VR Ray Tracing</h1>
+			<hr>
+			<h2>Project descrption, initial goals, and current </h2>
+			<p>The goal of this project was to get real time ray tracing in virtual reality. Specifically, the goal was to get scenes of 10,000 or more shapes (triangles and spheres) to render in 30+ FPS, with phong shading with reflections, refractions, and shadows. Three systems were to be supported: desktop (Linux and Windows), HTC Vive, and the Cave. The user was also supposed to be able to change the camera position and orientation interactively at run-time.</p>
+			<h2>Current Progress</h2>
+			<p>Not all of the features were completed however. The ray tracer runs for all three systems as desired. It can render triangles and spheres with phong shading and shadows. It supports objects that are reflective or refractive, but a single object cannot be both. As for the FPS, there currently is no spatial data structure, so each intersection test is expensive. As a result, only about 650 simple (non reflective) shapes can be supported before the frame rate drops below 30 FPS. Keyboard controls have been added so the user can move throughout the scene. The Cave and Vive allow you to move your head around to some degree, but the keyboard still allows for full control.</p>
+			<h2>Difficulties</h2>
+			<p>This project had many, many roadblocks. They primarily stemmed from two areas: writing the actual GPU program, and getting it to work in VR.The first one was what tool to use to make a ray tracer on the GPU. The options I looked at were CUDA, OpenCL, and OpenGL’s compute shaders. For all of them, there seemed to be a lack of documentation and tutorials on how to write GPU programs. Not to mention I didn’t really know how the GPU’s run programs, which made it harder to dive into. Ultimately, I decided to use OpenGL’s compute shaders, because it is written using GLSL which I was familiar with, and fit nicely with the OpenGL pipeline I’m used to. Then I ended up losing many, many hours to not realizing that structs in the CPU side are not packed the same way as they are in the GPU. At one point I thought I had figured it out, and it was running on most computers, but not the Vive computer. Turns out that it was another memory alignment issue.</p>
+			<p>Transitioning the project into VR had many problems too. I used a framework called MinVR which had plugins for the Cave and Vive. Getting MinVR up and running on the desktop alone required learning a lot of small nuances with MinVR and also learning a lot about CMake, which took some time. Getting the write plugins to build and setting up the correct configurations for the Cave and Vive took a long time as well. I also had to restructure my code to generate rays based off of a view and projection matrix, which is what MinVR provides. Definitely would not have made it without help from the PhD students in my lab helping me set up the VR projects, and building with CMake.
+			</p>
+			<h2>Connection to class</h2>
+			<p>This project had a clear connection to the class, since homework 2 and 3 were to write a CPU ray tracer. My final project is mainly extending that homework. It takes advantage of the natural parallelization of ray tracing and the many cores in the GPU. It also extends to virtual reality, where we can just ray trace the scene with two different cameras, and run the results in stereo.</p>
+			<h2>Future work</h2>
+			<p>In the future, there a few main goals I have laid out. First, I want to get a proper spatial data structure working. In order to have complex scenes with interesting objects, there isn’t really any way to avoid using a spatial data structure and still remain above  FPS. The second goal is to support arbitrary OBJ files. Currently I am just using a trivial scene file format, similar to what was used for the previous homework CPU ray tracer. Third, I’d like to add a few more features, such as depth of field, so you could focus the cameras on certain areas and events. Lastly, in the far future, it would be awesome to use this as a renderer for a game. A real time, ray traced, virtual reality game isn’t common at all, so I think would be a fantastic project. Particularly with faster and faster GPUs coming out nowadays, making this more plausible.</p>
+			<h2>Code</h2>
+			<a href="https://github.com/LiamTyler/Real-Time-VR-Ray-Tracing">Link to the github repository</a>
+			<h2>Tools Used</h2>
+			<ul>
+				<li>OpenGL's compute shader to do the ray tracing</li>
+				<li>MinVR to handle getting the correct view and projection matrices, and the drawing outputted texture. It handles whether the program is being run on a desktop, VIVE, or Cave</li>
+				<li>CMake to build the project</li>
+			</ul>
+			<h2>Features</h2>
+			<ul>
+				<h3>Ray Tracer</h3>
+				<ul>
+					<li>Supported shapes: spheres and triangles</li>
+					<li>Supported types of lights: point, and directional</li>
+					<li>Supports variable number of lights</li>
+					<li>Phong Shading</li>
+					<li>Hard shadows</li>
+					<li>Reflections and refratctions</li>
+					<li>Variable camera position, direction, and resolution.</li>
+				</ul>
+				<h3>VR and Controls</h3>
+				<ul>
+					<li>Supported Systems: Linux and Windows</li>
+					<li>Supported devices: Desktop, VIVE, and Cave</li>
+					<li>Can move character through the scene and change camera orientation</li>
+				</ul>
+			</ul>
+			<h2>Images and Videos:</h2>
+			<div class="centerText">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/w8v2yYvIHSY" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				<p>This is a quick demo video of the program working in the Cave (without stero) with a simple scene. Refractive sphere on the left, mostly diffuse on in the middle, and fully reflective on the right.</p>
+				<hr>
+			</div>
+			<div class="centerText">
+				<img class="capWidth" src="all-three-fat.png">
+				<p>Still image of scene used for the demo video.</p>
+				<hr>
+			</div>
+			<div class="centerText">
+				<img class="capWidth" src="reflective.png">
+				<p>Close up on the relfective sphere in the demo scene.</p>
+				<hr>
+			</div>
+			<div class="centerText">
+				<img class="capWidth" src="refractive.png">
+				<p>Close up on the refractive sphere used in the demo scene.</p>
+				<hr>
+			</div>
+			<div class="centerText">
+				<img class="capWidth" src="bear.png">
+				<p>Image of a bear made out of diffuse spheres.</p>
+				<hr>
+			</div>
+			<div class="centerText">
+				<img class="capWidth" src="arm.png">
+				<p>A portion of an arm (max amount of simple triangles the program can handle while staying above 30 FPS).</p>
+				<hr>
+			</div>
+			<div class="centerText">
+				<img class="capWidth" src="cave1.JPG">
+				<p>A still image of what the Cave looks like without any program running in it. It is four sides of a cube, each with two projectors on it.</p>
+				<hr>
+			</div>
+		</div>
+	</body>
 </html>
