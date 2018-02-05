@@ -16,7 +16,7 @@
         <h2>Description</h2>
         <p>The goal of this assignment was to create a particle system to help with the following four simulations: A ball bouncing on a floor, a water fountain, a fire, and fireworks. We did those, as well as a smoke simulation.</p>
         <h2>Difficulties</h2>
-        <p></p>
+        <p>We had a lot of difficulties for this project, about four main ones. The first was getting the balls to be normal mapped, and calculating where the depth of the fragment should be. Next was having transparent particles and blending them properly in order. After that we had many bugs with the emitters. Lastly, getting all of the different types of particles to be on the screen simultaneously was difficult because we had to redo a lot of our structure. Overall it was a challenging project, most of it not related to the actual particle system, but how to draw it.</p>
         <h2>Code</h2>
         <a href="5607_hw1-master.zip" download>Download zip file of code</a>
         <br>
@@ -49,7 +49,7 @@
             <li><strong>P: </strong>Pause the simulation</li>
             <li><strong>Space: </strong>Emit particles from currently selected emitter</li>
             <li><strong>F: </strong>Launch Firework</li>
-            <li><strong>1 - 4: </strong>Select specific emitter</li>
+            <li><strong>1 - 5: </strong>Select specific emitter</li>
             <li><strong>Arrow Keys: </strong>Move the Sphere forward, backwards, left, and right</li>
         </ul>
         <h2>Tools Used</h2>
@@ -59,8 +59,21 @@
             <li>GLM for the vectors and matrices</li>
             <li>OpenMP for parallelizing the particle updating</li>
         </ul>
+        <h2>Implementation Details</h2>
+        <p>Our system in general worked as following every frame:</p>
+        <ol>
+            <li>Update the particles on the CPU. This would be updating the particle's position, velocity, age, and any other relevant data. Delete the old (dead) particles in this stage.</li>
+            <li>Stream the data that is relevant for drawing the particles to the GPU.</li>
+            <li>Draw the particles.</li>
+        </ol>
+        <p>To further describe each simulation:</p>
+        <p>Bouncing Balls: All of our particles are billboarded quads. To make the quads seem like actual spheres though, we used normal mapping to get the correct lighting for each fragment. We also recalcuated the depth of the fragments so that intersecting spheres looks correct. These are fully opaque, and rendered first.</p>
+        <p>Water: For </p>
+        <p>Fire: </p>
+        <p>Smoke: </p>
+        <p>Fireworks: </p>
         <h2>Thread Parallel Performance</h2>
-        <p>The way our particle system works, is that every frame, we update our particles (position, velocity, etc.) on the CPU, send the relevant data the the GPU, and then draw it using the GPU. We used OpenMP to help with the updating of the particles. To do this however, we had to change our implementation. If a particle's age is past its lifetime, we delete it bu just moving the last particle in the array into the now dead particle's spot. The problem with this, is that it cannot be done in parallel. So with OpenMP we switched it so that when a particle should be deleted, it adds the particle to a locked list, but does not delete it yet. After the updates, the deleting is done with one thread. Here were our results:</p>
+        <p>We later used OpenMP to help with the updating of the particles. To do this however, we had to change our implementation. If a particle's age is past its lifetime, we delete it bu just moving the last particle in the array into the now dead particle's spot. The problem with this, is that it cannot be done in parallel. So with OpenMP we switched it so that when a particle should be deleted, it adds the particle to a locked list, but does not delete it yet. After the updates, the deleting is done with one thread. Here were our results:</p>
           <img class="capWidth scale" src="parallel.jpg">
           <p>We were initially confused as to why we got no performance benefit. We figured out that it is due to two reasons: Caching, and the locked array. The locked array is obviously going to slow it down a little, but there aren't that many deletes per frame, so it doesn't explain everything. The rest is explained by our particle class having many attributes, so each particle is ~90 bytes. If we try to have hundreds of thousands of particles, we end up having a huge array. This means a lot of cache misses using multiple threads, and if we have not that many particles, it hardly matters whether you have parallelization or not. If we had used the 'struct of arrays' approach, instead of our 'array of structs', we would probably see improvement here.</p>
         <h2>Videos</h2>
