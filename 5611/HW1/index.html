@@ -68,10 +68,11 @@
         </ol>
         <p>To further describe each simulation:</p>
         <p>Bouncing Balls: All of our particles are billboarded quads. To make the quads seem like actual spheres though, we used normal mapping to get the correct lighting for each fragment. We also recalcuated the depth of the fragments so that intersecting spheres looks correct. These are fully opaque, and rendered first.</p>
-        <p>Water: For </p>
-        <p>Fire: </p>
-        <p>Smoke: </p>
-        <p>Fireworks: </p>
+        <p>Water: For water, and all of the following particles, we used textured billboards. For water we used the same texture as the smoke, but used the particle's color (a light blue). The blending we did was regular blending with the current color * alpha + new color * (1 - alpha). We sorted these, and rendered them last.</p>
+        <p>Fire: Fire was interesting. We used a fire looking texture, and used the particle's age to look up its color in a color map which went from white-yellow, to red-black. We also used additive blending, to get the center of our fire to be 'white hot'. We also gave each fire particle a random rotation, and all fire shrinks and fades out of existance as it nears the end of its life. We rendered these after after the opaque objects, without sorting, but without writing to the depth buffer.</p>
+        <p>Smoke: Very similar to water, except that the color was grey. Each smoke particle also gets bigger and faded as it gets older, so simulate smoke dispersing. Sorted and rendered with water.</p>
+        <p>Fireworks: We created another particle which we called 'sparkle'. It uses a different texture, and its color changes over time. A firework object goes upwards, emitting a trail of sparkles and smoke until it detonates. Then two spheres of different colored sparkles are emitted, as well as smoke. These sparkles pop in luminosity initially, and then flicker throughout their life. They don't really fade out like smoke or fire does. We sort and render these with water.</p>
+        <p>Collisions: We have two modes of collisions. The first is naive, and only checks for collisions on the ground plane. The second is much slower, but linearly checks for collisions with artibrary game objects, and has friction with the collided object.</p>
         <h2>Thread Parallel Performance</h2>
         <p>We later used OpenMP to help with the updating of the particles. To do this however, we had to change our implementation. If a particle's age is past its lifetime, we delete it bu just moving the last particle in the array into the now dead particle's spot. The problem with this, is that it cannot be done in parallel. So with OpenMP we switched it so that when a particle should be deleted, it adds the particle to a locked list, but does not delete it yet. After the updates, the deleting is done with one thread. Here were our results:</p>
           <img class="capWidth scale" src="parallel.jpg">
