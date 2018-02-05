@@ -77,8 +77,13 @@
         <p>We later used OpenMP to help with the updating of the particles. To do this however, we had to change our implementation. If a particle's age is past its lifetime, we delete it bu just moving the last particle in the array into the now dead particle's spot. The problem with this, is that it cannot be done in parallel. So with OpenMP we switched it so that when a particle should be deleted, it adds the particle to a locked list, but does not delete it yet. After the updates, the deleting is done with one thread. Here were our results:</p>
           <img class="capWidth scale" src="parallel.jpg">
           <p>We were initially confused as to why we got no performance benefit. We figured out that it is due to two reasons: Caching, and the locked array. The locked array is obviously going to slow it down a little, but there aren't that many deletes per frame, so it doesn't explain everything. The rest is explained by our particle class having many attributes, so each particle is ~90 bytes. If we try to have hundreds of thousands of particles, we end up having a huge array. This means a lot of cache misses using multiple threads, and if we have not that many particles, it hardly matters whether you have parallelization or not. If we had used the 'struct of arrays' approach, instead of our 'array of structs', we would probably see improvement here.</p>
+        <h2>Benchmarks</h2>
+        <p>Since we had two collision methods as described above, we benchmarked each simulation except for fireworks with both collision methods. For each simulation, we recorded how many particles (actively emitting) we could reach before dropping below 30 FPS. Here are the results:</p>
+          <img class="capWidth scale" src="benchmarks.jpg">
+          <p>As you can see, the non-naive collisions are much slower. In general, the balls and fire are much faster as well, most likely because they don't have to be sorted.</p>
+
         <h2>Videos</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/XLc429Wvd5g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/bIydh2O3wi4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <h2>Images:</h2>
         <div class="centerText">
           <img class="capWidth" src="all_particles.png">
