@@ -16,9 +16,9 @@
         <h2>Description</h2>
         <p>The goal of this assignment was to create a particle system to help with the following four simulations: A ball bouncing on a floor, a water fountain, a fire, and fireworks. We did those, as well as a smoke simulation.</p>
         <h2>Difficulties</h2>
-        <p>We had a lot of difficulties for this project, about four main ones. The first was getting the balls to be normal mapped, and calculating where the depth of the fragment should be. Next was having transparent particles and blending them properly in order. After that we had many bugs with the emitters. Lastly, getting all of the different types of particles to be on the screen simultaneously was difficult because we had to redo a lot of our structure. Overall it was a challenging project, most of it not related to the actual particle system, but how to draw it.</p>
+        <p>We had a lot of difficulties for this project, about four main ones. The first was getting the balls to be normal mapped, and calculating where the depth of the fragment should be. Next was having transparent particles and blending them properly in order. This was a pain, because only some of the particles had to be sorted, some needed different blending modes, and the drawing order mattered. After that we had many bugs with the emitters. Lastly, getting all of the different types of particles to be on the screen simultaneously was difficult because we had to redo a lot of our structure. Overall it was a challenging project, most of it not related to the actual particle system, but how to draw it.</p>
         <h2>Code</h2>
-        <a href="5607_hw1-master.zip" download>Download zip file of code</a>
+        <a href="5611-hw1-master.zip" download>Download zip file of code</a>
         <br>
         <a href="https://github.umn.edu/tyler147/5611-hw1">Link to Github</a>
         <h2>Simulations</h2>
@@ -81,11 +81,32 @@
         <iframe width="560" height="315" src="https://www.youtube.com/embed/XLc429Wvd5g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <h2>Images:</h2>
         <div class="centerText">
-          <img class="capWidth" src="red_bouncing_ball.png">
-          <p>A snapshot of a single ball bouncing across the floor</p>
+          <img class="capWidth" src="all_particles.png">
+          <p></p>
+          <hr>
+          <img class="capWidth" src="water.png">
+          <p>A zoom in on the water fountain</p>
+          <hr>
+          <img class="capWidth" src="fire.png">
+          <p>Zoomed out picture of fire wrapping around a ball</p>
+          <hr>
+          <img class="capWidth" src="smoke.png">
+          <p>Close view of the smoke emitter</p>
+          <hr>
+          <img class="capWidth" src="fire_smoke_sphere.png">
+          <p>Zoomed in picture of the fire. The flame sticks to the bottom of the ball and makes it look like the ball is heating up</p>
+          <hr>
+          <img class="capWidth" src="one_firework.png">
+          <p>Zoomed in picture of a firework. There is an outer sphere of purple sparkles, and inner sphere of yellow sparkles, and smoke</p>
+          <hr>
+          <img class="capWidth" src="many_fireworks.png">
+          <p>View of a detonating firework with several other ones launching</p>
+          <hr>
+          <img class="capWidth" src="ball.png">
+          <p>A zoom in on the normal mapped balls</p>
           <hr>
         </div>
-        <h2>Artistic Submission:</h2>
+        <h2>Artistic Submissions:</h2>
         <div class="centerText">
           <img class="capWidth scale" src="fire_paper.jpg">
           <p>Failed attempt to texture billboards with a fire shape</p>
@@ -98,6 +119,9 @@
           <hr>
           <img class="capWidth scale" src="outline.jpg">
           <p>Calculating depth for normal mapped billboards gone wrong, giving an outline</p>
+          <hr>
+          <img class="capWidth scale" src="cyclone.jpg">
+          <p>Super low frame rate lead to inaccurate integration, which added energy to the system</p>
           <hr>
         </div>
       </div>
