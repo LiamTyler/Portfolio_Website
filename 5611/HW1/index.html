@@ -76,8 +76,23 @@
             <p>We also implemented several other features:</p>
             <p><strong>Game Objects: </strong>In order to make testing the particle systems easier, we created Game Object primitives which can interact with the particles. The two types of game objects we created were spheres and planes</p>
             <p><strong>Collisions: </strong>We have two modes of collisions. The first is naive, and only checks for collisions on the ground plane. The second is much slower, but linearly checks for collisions with artibrary game objects, and has friction with the collided object. Sphere collisions use a simple check to see if particles are within the sphere's radius. Plane collisions are slightly more complicated, and use an adaptation of the <a href="https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm">M&ouml;ller-Trumbore intersection algorithm</a> for triangles.</p>
-            <p><strong>Textured Quads: </strong>As mentioned previously, every particle is a textured quad. A sample of the some of the textures used can be found below. All textures except the normal map for the spheres were created by the authors using GIMP.</p>
-            <!-- TODO add texture images (probably fire, smoke, normal map?) -->
+            <p><strong>Textured Quads: </strong>As mentioned previously, every particle is a textured quad. A sample of the some of the textures used can be found below. All textures except the normal map and colormap were created by the authors using GIMP.</p>
+            <p><strong>Textures:</strong></p>
+            <img class="capWidth" src="fire_tex2.png">
+            <p>Fire texture</p>
+            <hr>
+            <img class="capWidth" src="smoke2.png">
+            <p>Smoke and water texture</p>
+            <hr>
+            <img class="capWidth" src="firework.png">
+            <p>Firework sparkle texture</p>
+            <hr>
+            <img class="capWidth" src="normalTex.png">
+            <p>Normal maptexture</p>
+            <hr>
+            <img class="capWidth" src="fire.png">
+            <p>Fire color map</p>
+            <hr>
             <h2>Thread Parallel Performance</h2>
             <p>We later used OpenMP to help with the updating of the particles. To do this however, we had to change our implementation. If a particle's age is past its lifetime, we delete it bu just moving the last particle in the array into the now dead particle's spot. The problem with this, is that it cannot be done in parallel. So with OpenMP we switched it so that when a particle should be deleted, it adds the particle to a locked list, but does not delete it yet. After the updates, the deleting is done with one thread. Here were our results:</p>
             <img class="capWidth scale" src="parallel.jpg">
