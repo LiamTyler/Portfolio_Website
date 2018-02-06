@@ -1,186 +1,139 @@
-
-        <h2>Group Members</h2>
-        <ul>
-            <li>Liam Tyler</li>
-            <li>Bridger Herman</li>
-        </ul>
-        <h2>Description</h2>
-        <p>The goal of this assignment was to create a particle system to help with the following four simulations: A ball bouncing on a floor, a water fountain, a fire, and fireworks. We did those, as well as a smoke simulation.</p>
-        <h2>Difficulties</h2>
-        <p>We had four primary difficulties during the course of this project. The first was getting the balls to be normal mapped, and calculating where the depth of the fragment should be. Next was having transparent particles and blending them properly in order. This was a pain, because only some of the particles had to be sorted, some needed different blending modes, and the drawing order mattered. After that we had many bugs with the emitters. Lastly, getting all of the different types of particles to be on the screen simultaneously was difficult because we had to redo a lot of our code structure. Overall it was a challenging project, most of it not related to the actual particle system, but how to draw it.</p>
-        <h2>Code</h2>
-        <a href="http://liamtyler.com/5611/HW1/5611-hw1-master.zip" download="">Download zip file of code</a>
-        <br>
-        <a href="https://github.umn.edu/tyler147/5611-hw1">Link to Github</a>
-        <h2>Simulations</h2>
-        <ul>
-            <li>Bouncing Ball</li>
-            <li>Water</li>
-            <li>Fire</li>
-            <li>Smoke</li>
-            <li>Fireworks</li>
-        </ul>
-        <h2>Features</h2>
-        <ul>
-            <li>3D implementation</li>
-            <li>3D user controlled camera</li>
-            <li>Particle-Obstacle Interactions (arbitrary planes and spheres)</li>
-            <li>Textured sprites for particles (besides balls)</li>
-            <li>Translucent particles</li>
-            <li>Benchmarks 1 - 4: Can have over 100k particles with 30+ FPS</li>
-            <li>Thread parallel implementation (see below for performance details)</li>
-            <li>Billboarding used for the particles</li>
-            <li>Normal mapping and diffuse lighting for the balls to make them look like real spheres</li>
-            <li>Point, disc, hemisphere, and sphere emitters</li>
-        </ul>
-        <h2>Controls</h2>
-        <ul>
-            <li><strong>W,A,S,D: </strong>Move the camera forward, backwards, left, and right</li>
-            <li><strong>Mouse: </strong>Rotate the camera</li>
-            <li><strong>P: </strong>Pause the simulation</li>
-            <li><strong>Space: </strong>Emit particles from currently selected emitter</li>
-            <li><strong>F: </strong>Launch Firework</li>
-            <li><strong>1 - 5: </strong>Select specific emitter</li>
-            <li><strong>Arrow Keys: </strong>Move the Sphere forward, backwards, left, and right</li>
-        </ul>
-
-
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <?php include '../../header.php';?>
-  </head>
-  <body>
-      <?php include '../../navbar.php';?>
-      <div id="projects">
-        <h1 class="centerText">Particle Systems</h1>
-        <hr>
-        <h2>Group Members</h2>
-        <ul>
-            <li>Liam Tyler</li>
-            <li>Bridger Herman</li>
-        </ul>
-        <h2>Description</h2>
-        <p>The goal of this assignment was to create a particle system to help with the following four simulations: A ball bouncing on a floor, a water fountain, a fire, and fireworks. We did those, as well as a smoke simulation.</p>
-        <h2>Difficulties</h2>
-        <p>We had a lot of difficulties for this project, about four main ones. The first was getting the balls to be normal mapped, and calculating where the depth of the fragment should be. Next was having transparent particles and blending them properly in order. This was a pain, because only some of the particles had to be sorted, some needed different blending modes, and the drawing order mattered. After that we had many bugs with the emitters. Lastly, getting all of the different types of particles to be on the screen simultaneously was difficult because we had to redo a lot of our structure. Overall it was a challenging project, most of it not related to the actual particle system, but how to draw it.</p>
-        <h2>Code</h2>
-        <a href="5611-hw1-master.zip" download>Download zip file of code</a>
-        <br>
-        <a href="https://github.umn.edu/tyler147/5611-hw1">Link to Github</a>
-        <h2>Simulations</h2>
-        <ul>
-            <li>Bouncing Ball</li>
-            <li>Water</li>
-            <li>Fire</li>
-            <li>Smoke</li>
-            <li>Fireworks</li>
-        </ul>
-        <h2>Features</h2>
-        <ul>
-            <li>3D implementation</li>
-            <li>3D user controlled camera</li>
-            <li>Particle-Obstacle Interactions (arbitrary planes and spheres)</li>
-            <li>Textured sprites for particles (besides balls)</li>
-            <li>Translucent particles</li>
-            <li>Benchmarks 1 - 4: Can have over 100k particles with 30+ FPS</li>
-            <li>Thread parallel implementation (see below for performance details)</li>
-            <li>Billboarding used for the particles</li>
-            <li>Normal mapping and diffuse lighting for the balls to make them look like real spheres</li>
-            <li>Point, disc, hemisphere, and sphere emitters</li>
-        </ul>
-        <h2>Controls</h2>
-        <ul>
-            <li><strong>W,A,S,D: </strong>Move the camera forward, backwards, left, and right</li>
-            <li><strong>Mouse: </strong>Rotate the camera</li>
-            <li><strong>P: </strong>Pause the simulation</li>
-            <li><strong>Space: </strong>Emit particles from currently selected emitter</li>
-            <li><strong>F: </strong>Launch Firework</li>
-            <li><strong>1 - 5: </strong>Select specific emitter</li>
-            <li><strong>Arrow Keys: </strong>Move the Sphere forward, backwards, left, and right</li>
-        </ul>
-        <h2>Tools Used</h2>
-        <ul>
-            <li>OpenGL for the rendering</li>
-            <li>SDL2 for the window management and user interaction</li>
-            <li>GLM for the vectors and matrices</li>
-            <li>OpenMP for parallelizing the particle updating</li>
-        </ul>
-        <h2>Implementation Details</h2>
-        <p>Our system in general worked as following every frame:</p>
-        <ol>
-            <li>Update the particles on the CPU. This would be updating the particle's position, velocity, age, and any other relevant data. Delete the old (dead) particles in this stage.</li>
-            <li>Stream the data that is relevant for drawing the particles to the GPU.</li>
-            <li>Draw the particles.</li>
-        </ol>
-        <p>To further describe each simulation:</p>
-        <p><strong>Bouncing Balls: </strong>All of our particles are billboarded quads. To make the quads seem like actual spheres though, we used normal mapping to get the correct lighting for each fragment. We also recalcuated the depth of the fragments so that intersecting spheres look correct. These are fully opaque, and rendered first.</p>
-        <p><strong>Water: </strong>For water, and all of the following particles, we used textured billboards. For water we used the same texture as the smoke, but used the particle's color (a light blue) to differentiate them. The blending we did was regular blending with the current color * alpha + new color * (1 - alpha). We sorted these particles, and rendered them last.</p>
-        <p><strong>Fire: </strong>Fire was interesting. We used a fire texture, and used the particle's age to look up its color in a color map which went from white-yellow, to red-black. We also used additive blending, to get the center of our fire to be 'white hot'. We also gave each fire particle a random rotation, and all fire shrinks and fades out of existance as it nears the end of its life. We rendered these after after the opaque objects, without sorting, but without writing to the depth buffer.</p>
-        <p><strong>Smoke: </strong>Very similar to water, except that the color was grey. Each smoke particle also gets bigger and faded as it gets older, so simulate smoke dispersing. Sorted and rendered with water.</p>
-        <p><strong>Fireworks: </strong>We created another particle which we called 'sparkle'. It uses a different texture, and its color changes over time. A firework object goes upwards, emitting a trail of sparkles and smoke until it detonates. Then two spheres of different colored sparkles are emitted, as well as smoke. These sparkles pop in luminosity initially, and then flicker throughout their life. They don't really fade out like smoke or fire does. We sort and render these with water.</p>
+    <head>
+        <?php include '../../header.php';?>
+    </head>
+    <body>
+        <?php include '../../navbar.php';?>
+        <div id="projects">
+            <h1 class="centerText">Particle Systems</h1>
+            <hr>
+            <h2>Group Members</h2>
+            <ul>
+                <li>Liam Tyler</li>
+                <li>Bridger Herman</li>
+            </ul>
+            <h2>Description</h2>
+            <p>The goal of this assignment was to create a particle system to help with the following four simulations: A ball bouncing on a floor, a water fountain, a fire, and fireworks. We did those, as well as a smoke simulation.</p>
+            <h2>Difficulties</h2>
+            <p>We had a lot of difficulties for this project, about four main ones. The first was getting the balls to be normal mapped, and calculating where the depth of the fragment should be. Next was having transparent particles and blending them properly in order. This was a pain, because only some of the particles had to be sorted, some needed different blending modes, and the drawing order mattered. After that we had many bugs with the emitters. Lastly, getting all of the different types of particles to be on the screen simultaneously was difficult because we had to redo a lot of our structure. Overall it was a challenging project, most of it not related to the actual particle system, but how to draw it.</p>
+            <h2>Code</h2>
+            <a href="5611-hw1-master.zip" download>Download zip file of code</a>
+            <br>
+            <a href="https://github.umn.edu/tyler147/5611-hw1">Link to Github</a>
+            <h2>Simulations</h2>
+            <ul>
+                <li>Bouncing Ball</li>
+                <li>Water</li>
+                <li>Fire</li>
+                <li>Smoke</li>
+                <li>Fireworks</li>
+            </ul>
+            <h2>Features</h2>
+            <ul>
+                <li>3D implementation</li>
+                <li>3D user controlled camera</li>
+                <li>Particle-Obstacle Interactions (arbitrary planes and spheres)</li>
+                <li>Textured sprites for particles (besides balls)</li>
+                <li>Translucent particles</li>
+                <li>Benchmarks 1 - 4: Can have over 100k particles with 30+ FPS</li>
+                <li>Thread parallel implementation (see below for performance details)</li>
+                <li>Billboarding used for the particles</li>
+                <li>Normal mapping and diffuse lighting for the balls to make them look like real spheres</li>
+                <li>Point, disc, hemisphere, and sphere emitters</li>
+            </ul>
+            <h2>Controls</h2>
+            <ul>
+                <li><strong>W,A,S,D: </strong>Move the camera forward, backwards, left, and right</li>
+                <li><strong>Mouse: </strong>Rotate the camera</li>
+                <li><strong>P: </strong>Pause the simulation</li>
+                <li><strong>Space: </strong>Emit particles from currently selected emitter</li>
+                <li><strong>F: </strong>Launch Firework</li>
+                <li><strong>1 - 5: </strong>Select specific emitter</li>
+                <li><strong>Arrow Keys: </strong>Move the Sphere forward, backwards, left, and right</li>
+            </ul>
+            <h2>Tools Used</h2>
+            <ul>
+                <li>OpenGL for the rendering</li>
+                <li>SDL2 for the window management and user interaction</li>
+                <li>GLM for the vectors and matrices</li>
+                <li>OpenMP for parallelizing the particle updating</li>
+            </ul>
+            <h2>Implementation Details</h2>
+            <p>Our system in general worked as following every frame:</p>
+            <ol>
+                <li>Update the particles on the CPU. This would be updating the particle's position, velocity, age, and any other relevant data. Delete the old (dead) particles in this stage.</li>
+                <li>Stream the data that is relevant for drawing the particles to the GPU.</li>
+                <li>Draw the particles.</li>
+            </ol>
+            <p>To further describe each simulation:</p>
+            <p><strong>Bouncing Balls: </strong>All of our particles are billboarded quads. To make the quads seem like actual spheres though, we used normal mapping to get the correct lighting for each fragment. We also recalcuated the depth of the fragments so that intersecting spheres look correct. These are fully opaque, and rendered first.</p>
+            <p><strong>Water: </strong>For water, and all of the following particles, we used textured billboards. For water we used the same texture as the smoke, but used the particle's color (a light blue) to differentiate them. The blending we did was regular blending with the current color * alpha + new color * (1 - alpha). We sorted these particles, and rendered them last.</p>
+            <p><strong>Fire: </strong>Fire was interesting. We used a fire texture, and used the particle's age to look up its color in a color map which went from white-yellow, to red-black. We also used additive blending, to get the center of our fire to be 'white hot'. We also gave each fire particle a random rotation, and all fire shrinks and fades out of existance as it nears the end of its life. We rendered these after after the opaque objects, without sorting, but without writing to the depth buffer.</p>
+            <p><strong>Smoke: </strong>Very similar to water, except that the color was grey. Each smoke particle also gets bigger and faded as it gets older, so simulate smoke dispersing. Sorted and rendered with water.</p>
+            <p><strong>Fireworks: </strong>We created another particle which we called 'sparkle'. It uses a different texture, and its color changes over time. A firework object goes upwards, emitting a trail of sparkles and smoke until it detonates. Then two spheres of different colored sparkles are emitted, as well as smoke. These sparkles pop in luminosity initially, and then flicker throughout their life. They don't really fade out like smoke or fire does. We sort and render these with water.</p>
 
-        <p>We also implemented several other features:</p>
-        <p><strong>Game Objects: </strong>In order to make testing the particle systems easier, we created Game Object primitives which can interact with the particles. The two types of game objects we created were spheres and planes</p>
-        <p><strong>Collisions: </strong>We have two modes of collisions. The first is naive, and only checks for collisions on the ground plane. The second is much slower, but linearly checks for collisions with artibrary game objects, and has friction with the collided object. Sphere collisions use a simple check to see if particles are within the sphere's radius. Plane collisions are slightly more complicated, and use an adaptation of the <a href="https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm">M&ouml;ller-Trumbore intersection algorithm</a> for triangles.</p>
-        <p><strong>Textured Quads: </strong>As mentioned previously, every particle is a textured quad. A sample of the some of the textures used can be found below. All textures except the normal map for the spheres were created by the authors using GIMP.</p>
-        <!-- TODO add texture images (probably fire, smoke, normal map?) -->
-        <h2>Thread Parallel Performance</h2>
-        <p>We later used OpenMP to help with the updating of the particles. To do this however, we had to change our implementation. If a particle's age is past its lifetime, we delete it bu just moving the last particle in the array into the now dead particle's spot. The problem with this, is that it cannot be done in parallel. So with OpenMP we switched it so that when a particle should be deleted, it adds the particle to a locked list, but does not delete it yet. After the updates, the deleting is done with one thread. Here were our results:</p>
-          <img class="capWidth scale" src="parallel.jpg">
-          <p>We were initially confused as to why we got no performance benefit. We figured out that it is due to two reasons: Caching, and the locked array. The locked array is obviously going to slow it down a little, but there aren't that many deletes per frame, so it doesn't explain everything. The rest is explained by our particle class having many attributes, so each particle is ~90 bytes. If we try to have hundreds of thousands of particles, we end up having a huge array. This means a lot of cache misses using multiple threads, and if we have not that many particles, it hardly matters whether you have parallelization or not. If we had used the 'struct of arrays' approach, instead of our 'array of structs', we would probably see improvement here.</p>
-        <h2>Benchmarks</h2>
-        <p>Since we had two collision methods as described above, we benchmarked each simulation except for fireworks with both collision methods. For each simulation, we recorded how many particles (actively emitting) we could reach before dropping below 30 FPS. Here are the results:</p>
-          <img class="capWidth scale" src="benchmarks.jpg">
-          <p>As you can see, the non-naive collisions are much slower. In general, the balls and fire are much faster as well, most likely because they don't have to be sorted.</p>
+            <p>We also implemented several other features:</p>
+            <p><strong>Game Objects: </strong>In order to make testing the particle systems easier, we created Game Object primitives which can interact with the particles. The two types of game objects we created were spheres and planes</p>
+            <p><strong>Collisions: </strong>We have two modes of collisions. The first is naive, and only checks for collisions on the ground plane. The second is much slower, but linearly checks for collisions with artibrary game objects, and has friction with the collided object. Sphere collisions use a simple check to see if particles are within the sphere's radius. Plane collisions are slightly more complicated, and use an adaptation of the <a href="https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm">M&ouml;ller-Trumbore intersection algorithm</a> for triangles.</p>
+            <p><strong>Textured Quads: </strong>As mentioned previously, every particle is a textured quad. A sample of the some of the textures used can be found below. All textures except the normal map for the spheres were created by the authors using GIMP.</p>
+            <!-- TODO add texture images (probably fire, smoke, normal map?) -->
+            <h2>Thread Parallel Performance</h2>
+            <p>We later used OpenMP to help with the updating of the particles. To do this however, we had to change our implementation. If a particle's age is past its lifetime, we delete it bu just moving the last particle in the array into the now dead particle's spot. The problem with this, is that it cannot be done in parallel. So with OpenMP we switched it so that when a particle should be deleted, it adds the particle to a locked list, but does not delete it yet. After the updates, the deleting is done with one thread. Here were our results:</p>
+            <img class="capWidth scale" src="parallel.jpg">
+            <p>We were initially confused as to why we got no performance benefit. We figured out that it is due to two reasons: Caching, and the locked array. The locked array is obviously going to slow it down a little, but there aren't that many deletes per frame, so it doesn't explain everything. The rest is explained by our particle class having many attributes, so each particle is ~90 bytes. If we try to have hundreds of thousands of particles, we end up having a huge array. This means a lot of cache misses using multiple threads, and if we have not that many particles, it hardly matters whether you have parallelization or not. If we had used the 'struct of arrays' approach, instead of our 'array of structs', we would probably see improvement here.</p>
+            <h2>Benchmarks</h2>
+            <p>Since we had two collision methods as described above, we benchmarked each simulation except for fireworks with both collision methods. For each simulation, we recorded how many particles (actively emitting) we could reach before dropping below 30 FPS. Here are the results:</p>
+            <img class="capWidth scale" src="benchmarks.jpg">
+            <p>As you can see, the non-naive collisions are much slower. In general, the balls and fire are much faster as well, most likely because they don't have to be sorted.</p>
 
-        <h2>Videos</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/bIydh2O3wi4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <h2>Images:</h2>
-        <div class="centerText">
-          <img class="capWidth" src="all_particles.png">
-          <p>All particle systems (except fireworks) emitting at once</p>
-          <hr>
-          <img class="capWidth" src="water.png">
-          <p>A zoom in on the water fountain</p>
-          <hr>
-          <img class="capWidth" src="fire.png">
-          <p>Zoomed out picture of fire wrapping around a ball</p>
-          <hr>
-          <img class="capWidth" src="smoke.png">
-          <p>Close view of the smoke emitter</p>
-          <hr>
-          <img class="capWidth" src="fire_smoke_sphere.png">
-          <p>Zoomed in picture of the fire. The flame sticks to the bottom of the ball and makes it look like the ball is heating up</p>
-          <hr>
-          <img class="capWidth" src="one_firework.png">
-          <p>Zoomed in picture of a firework. There is an outer sphere of purple sparkles, and inner sphere of yellow sparkles, and smoke</p>
-          <hr>
-          <img class="capWidth" src="many_fireworks.png">
-          <p>View of a detonating firework with several other ones launching</p>
-          <hr>
-          <img class="capWidth" src="ball.png">
-          <p>A zoom in on the normal mapped balls</p>
-          <hr>
+            <h2>Videos</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/bIydh2O3wi4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <h2>Images:</h2>
+            <div class="centerText">
+                <img class="capWidth" src="all_particles.png">
+                <p>All particle systems (except fireworks) emitting at once</p>
+                <hr>
+                <img class="capWidth" src="water.png">
+                <p>A zoom in on the water fountain</p>
+                <hr>
+                <img class="capWidth" src="fire.png">
+                <p>Zoomed out picture of fire wrapping around a ball</p>
+                <hr>
+                <img class="capWidth" src="smoke.png">
+                <p>Close view of the smoke emitter</p>
+                <hr>
+                <img class="capWidth" src="fire_smoke_sphere.png">
+                <p>Zoomed in picture of the fire. The flame sticks to the bottom of the ball and makes it look like the ball is heating up</p>
+                <hr>
+                <img class="capWidth" src="one_firework.png">
+                <p>Zoomed in picture of a firework. There is an outer sphere of purple sparkles, and inner sphere of yellow sparkles, and smoke</p>
+                <hr>
+                <img class="capWidth" src="many_fireworks.png">
+                <p>View of a detonating firework with several other ones launching</p>
+                <hr>
+                <img class="capWidth" src="ball.png">
+                <p>A zoom in on the normal mapped balls</p>
+                <hr>
+            </div>
+            <h2>Artistic Submissions:</h2>
+            <div class="centerText">
+                <img class="capWidth scale" src="fire_paper.jpg">
+                <p>Failed attempt to texture billboards with a fire shape</p>
+                <hr>
+                <img class="capWidth scale" src="fire_paper_blending.jpg">
+                <p>Attempt two for texturing billboards with a fire shape</p>
+                <hr>
+                <img class="capWidth scale" src="slinky.jpg">
+                <p>Normal mapping gone wrong, except for the edges</p>
+                <hr>
+                <img class="capWidth scale" src="outline.jpg">
+                <p>Calculating depth for normal mapped billboards gone wrong, giving an outline</p>
+                <hr>
+                <img class="capWidth scale" src="cyclone.jpg">
+                <p>Super low frame rate lead to inaccurate integration, which added energy to the system, making the balls bounce higher and higher</p>
+                <hr>
+            </div>
         </div>
-        <h2>Artistic Submissions:</h2>
-        <div class="centerText">
-          <img class="capWidth scale" src="fire_paper.jpg">
-          <p>Failed attempt to texture billboards with a fire shape</p>
-          <hr>
-          <img class="capWidth scale" src="fire_paper_blending.jpg">
-          <p>Attempt two for texturing billboards with a fire shape</p>
-          <hr>
-          <img class="capWidth scale" src="slinky.jpg">
-          <p>Normal mapping gone wrong, except for the edges</p>
-          <hr>
-          <img class="capWidth scale" src="outline.jpg">
-          <p>Calculating depth for normal mapped billboards gone wrong, giving an outline</p>
-          <hr>
-          <img class="capWidth scale" src="cyclone.jpg">
-          <p>Super low frame rate lead to inaccurate integration, which added energy to the system, making the balls bounce higher and higher</p>
-          <hr>
-        </div>
-      </div>
     </body>
 </html>
