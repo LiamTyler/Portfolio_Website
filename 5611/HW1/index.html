@@ -101,8 +101,9 @@
             <h2>Benchmarks</h2>
             <p>Since we had two collision methods as described above, we benchmarked each simulation except for fireworks with both collision methods. For each simulation, we recorded how many particles (actively emitting) we could reach before dropping below 30 FPS. Here are the results:</p>
             <img class="capWidth scale" src="benchmarks.jpg">
-            <p>As you can see, the non-naive collisions are much slower. In general, the balls and fire are much faster as well, most likely because they don't have to be sorted.</p>
-
+            <p>As you can see, the non-naive collisions are much slower. In general, the balls and fire are much faster as well, most likely because they don't have to be sorted. Even though the FPS drops down to ~20 with one million particles, we thought it was cool, so here are two images of that:</p>
+                <img class="capWidth" src="one_million.png">
+                <img class="capWidth" src="one_million_zoom.png">
             <h2>Videos</h2>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/bIydh2O3wi4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <h2>Images:</h2>
