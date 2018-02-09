@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <?php include '../header.php';?>
+  </head>
+  <body>
+  <?php include '../navbar.php';?>
+      <div id="projects">
+        <h1 class="centerText">Text Rain</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>This was the first assignment in my Graphics and Games class in spring 2016. The goal was to recreate "Text Rain", which was an interactive program done by Camille Utterback and Romy Achituv back in 1999. This recreation uses your webcam to capture video of the user. Alphabet letters randomly rain down from the sky, and will interact with the user, as if they were an object in the program. So, the user can "catch" letters and play around with them.</p>
+        <h2>Code</h2>
+        <a target="_blank" href="https://github.com/LiamTyler/Text-Rain">Go to Github page</a>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>Processing 3 for the whole program</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+          <li>Reading webcam input</li>
+          <li>Image processing: mirroring the image, and converting to grayscale</li>
+          <li>Interaction from the webcam video and text. This is done by not allowing the text into pixels that are below a certain brightness threshold</li>
+          <li>Simulated gravity. If the text is on a sloped surface, it will slide down slowly</li>
+          <li>Option to load different webcam options or a test video in the beginning menu</li>
+        </ul>
+        <h2>Images:</h2>
+        <div class="centerText">
+          <img class="capWidth" src="cup-reg.png">
+          <hr>
+          <img class="capWidth" src="cup-debug.png">
+          <hr>
+          <img class="capWidth" src="head-reg.png">
+          <hr>
+          <img class="capWidth" src="slant-debug.png">
+        </div>
+      </div>
+    </body>
+</html>
