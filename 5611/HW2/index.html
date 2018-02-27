@@ -9,9 +9,9 @@
             <h1 class="centerText">Mass Spring Simulations</h1>
             <hr>
             <h2>Description</h2>
-            <p></p>
+            <p>This project is a cloth simulation using a mass-spring system. This means that we represent the cloth as a grid of weighted nodes, connected to each other by springs. Each frame, the force on each spring is calculated and applied to the two nodes at the end of every spring. The new position and velocity of each node is found through Eulerian integration. The end result is a believable looking cloth.</p>
             <h2>Difficulties</h2>
-            <p></p>
+            <p>I had a few difficulties in this assignment. The first was how delicate spring systems can be. If you accidentally had one minus sign wrong, or some other thing just slightly wrong, it would explode. I ended up changing all of my floats to doubles, and it blew up a lot less. The main two problems I had were silly mistakes. The sphere I loaded in from blender didn't have its vertices centered at the origin, so I thought I had a rendering bug for a long time. Similarly, when I was testing drag, a vertically falling cloth shouldn't slow down with drag, but mine was. Turns out that it wasn't slowing down from drag, it was just my frame rate lowering from the drag calculations, making the cloth look slower.</p>
             <h2>Code</h2>
             <a href="5611-hw2-master.zip" download>Download zip file of code</a>
             <br>
@@ -19,17 +19,31 @@
             <h2>Features</h2>
             <ul>
                 <li>Realtime rendering</li>
-                <li>3D Mass-spring simulation</li>
-                <li>3D implementation</li>
+                <li>3D mass-spring simulation and rendering</li>
                 <li>3D user controlled camera</li>
+                <li>Real-time user interaction with system (see controls)</li>
+                <li>Cloth-sphere interaction</li>
+                <li>100x100 cloth at 30+ FPS</li>
                 <li>Eulerian intergration</li>
+                <li>Textured cloth rendering</li>
+                <li>Thread-parallel implementation</li>
+                <li>Wind component</li>
+                <li>Air resistance / drag</li>
             </ul>
             <h2>Controls</h2>
             <ul>
                 <li><strong>W,A,S,D: </strong>Move the camera forward, backwards, left, and right</li>
                 <li><strong>Mouse: </strong>Rotate the camera</li>
+                <li><strong>I,K: </strong>Increase / decrease the spring constant KS</li>
+                <li><strong>J,L: </strong>Decrease / increase the spring dampening constant KD</li>
                 <li><strong>P: </strong>Pause the simulation</li>
-                <li><strong>Arrow Keys: </strong>Move the last mass on the strings</li>
+                <li><strong>Arrow Keys: </strong>Move the ball around in the XZ plane</li>
+                <li><strong>C: </strong>Change visualization from wireframe to textured</li>
+                <li><strong>Z: </strong>Turn wind on/off</li>
+                <li><strong>X: </strong>Turn anchors on/off</li>
+                <li><strong>Space: </strong>Turn drag on / off</li>
+                <li><strong>H: </strong>Reset the simulation horizontally</li>
+                <li><strong>V: </strong>Reset the simulation vertically</li>
             </ul>
             <h2>Tools Used</h2>
             <ul>
@@ -37,21 +51,28 @@
                 <li>SDL2 for the window management and user interaction</li>
                 <li>GLM for the vectors and matrices</li>
             </ul>
+			<h2>Thread Parallel Performance</h2>
+			<p>I used OpenMP on most of the major for loops for my spring simulation. This included calculating the drag and spring forces, updating the positions, velocities, and normals. I tested having OpenMP vs No OpenMP on a 50x50 cloth, and about a 2x speed up as seen in the graph below.</p>
+			<img class="capWidth scale" src="parallel.jpg">
             <h2>Videos</h2>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/YBtbXH-QJuk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/WvXaPjFJmHs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <h2>Images:</h2>
             <div class="centerText">
+                <img class="capWidth" src="on_ball.png">
+                <p>Cloth landing ontop of the ball</p>
+                <hr>
                 <img class="capWidth" src="springs.jpg">
-                <p>Three strings being stretched out</p>
+                <p>Cloth in the wind, slightly hitting the sphere behind it</p>
                 <hr>
             </div>
             <h2>Artistic Submissions:</h2>
             <div class="centerText">
-                <!--
-                <img class="capWidth scale" src="">
-                <p></p>
+                <img class="capWidth scale" src="wacky_sphere.png">
+                <p>Accidentally spawned the sphere in the cloth</p>
                 <hr>
-                -->
+                <img class="capWidth scale" src="kd_too_high.png">
+                <p>This is what happens when I make the dampening constant just slightly too high</p>
+                <hr>
             </div>
         </div>
     </body>
