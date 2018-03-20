@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <?php include '../../header.php';?>
+    </head>
+    <body>
+        <?php include '../../navbar.php';?>
+        <div id="projects">
+            <h1 class="centerText">Multi-Agent Motion Planning</h1>
+            <hr>
+            <h2>Description</h2>
+            <p>This project is a basic framework for motion planning when there are multiple agents in an environment with varying obstacles. Each agent needs to navigate to its destination without running into obstacles or other agents. So far there is only support for a single agent.</p>
+            <h2>Difficulties</h2>
+            <p>The main difficulties I have had so far were mainly figuring out the best way to render things using my game engine, since this is the first project I am using my engine for.</p>
+            <h2>Code</h2>
+            <a href="multi-agent-motion-planning-master.zip" download>Download zip file of code</a>
+            <br>
+            <a href="https://github.com/LiamTyler/multi-agent-motion-planning">Link to Github</a>
+            <h2>Features</h2>
+            <ul>
+                <li>Single agent navigation</li>
+                <li>Supports any number of static cylindrical obstacles with varying sizes</li>
+                <li>Probabilistic roadmap (PRM) for possible paths</li>
+                <li>A* used to find the optimal path within the PRM</li>
+                <li>PRM is visualized by square nodes and lines connecting each node to its neighbors</li>
+                <li>Realtime rendering</li>
+                <li>3D user controlled camera</li>
+            </ul>
+            <h2>Tools Used</h2>
+            <ul>
+                <li>My game engine <a href="https://github.com/LiamTyler/Progression">Progression</a> for rendering, window management, and matrix libraries</li>
+            </ul>
+            <h2>Videos</h2>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/9pRq7YHwib4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <h2>Images:</h2>
+            <div class="centerText">
+                <img class="capWidth" src="top_down.png">
+                <p>Birds eye view of the agent moving around the center obstacle</p>
+                <hr>
+                <img class="capWidth" src="side_view.png">
+                <p>Side view of the agent moving around the center obstacle</p>
+                <hr>
+            </div>
+            <h2>Artistic Submissions:</h2>
+            <div class="centerText">
+                <img class="capWidth scale" src="">
+                <p></p>
+                <hr>
+            </div>
+        </div>
+    </body>
+</html>
