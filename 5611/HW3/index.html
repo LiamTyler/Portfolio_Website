@@ -9,42 +9,51 @@
             <h1 class="centerText">Multi-Agent Motion Planning</h1>
             <hr>
             <h2>Description</h2>
-            <p>This project is a basic framework for motion planning when there are multiple agents in an environment with varying obstacles. Each agent needs to navigate to its destination without running into obstacles or other agents. So far there is only support for a single agent.</p>
+			<p>This project is a basic framework for motion planning when there are multiple agents in an environment with varying obstacles. The goal is for each agent to get to their goal without colliding with any obstacles, or other agents. For my implentation, I used a probabilistic roadmap (PRM) combined with A* search to do the global planning, aka finding an overall path through the environment ignoring other agents. I then used Boids for the local planning to achieve agent avoidanc, obstacle avoidance, and flocking behavior.</p>
             <h2>Difficulties</h2>
-            <p>The main difficulties I have had so far were mainly figuring out the best way to render things using my game engine, since this is the first project I am using my engine for.</p>
+            <p>Some of the main difficulties I had were figuring out the best way to render things using my game engine, since this is the first project I am using my engine for. The next was tuning the forces to work correctly for boids, without the agents blowing up, barely moving, or jittering a lot.</p>
             <h2>Code</h2>
             <a href="multi-agent-motion-planning-master.zip" download>Download zip file of code</a>
             <br>
             <a href="https://github.com/LiamTyler/multi-agent-motion-planning">Link to Github</a>
             <h2>Features</h2>
             <ul>
-                <li>Single agent navigation</li>
+                <li>Multi-agent navigation</li>
                 <li>Supports any number of static cylindrical obstacles with varying sizes</li>
                 <li>Probabilistic roadmap (PRM) for possible paths</li>
                 <li>A* used to find the optimal path within the PRM</li>
+				<li>Add obstacles and replan at runtime (right click)</li>
+				<li>Change the agents' goal position and replan at runtime (left click)</li>
+				<li>Path smoothing: agents go towards the furthest visible node</li>
+				<li>Boids with 5 forces: separation, cohesion, alignment, goal force, and obstacle avoidance</li>
+				<li>3D scenes (with simple models currently) and 2D navigation</li>
                 <li>PRM is visualized by square nodes and lines connecting each node to its neighbors</li>
                 <li>Realtime rendering</li>
-                <li>3D user controlled camera</li>
             </ul>
+			<h2>Implementation Details</h2>
+			<h4>Global Planning and Changing Environment</h4>
+			<p>As said earlier, I use a PRM combined with A* to do the global planning. To create the PRM, I just randomly sample points and do a naive collision check with the obstacles, as well as for finding each PRM node's connecting neighbors. When a new obstacle is added, instead of chosing to repair the PRM, I just generate a new one, and replan the paths for all the agents. While all of the agents can have different paths, the user gives them all the same goal when they left click on the plane. While constructing a new PRM and redoing a bunch of searches that are the same is not the effecient strategy, I can't notice a drop in FPS from this.</p>
+			<h4>Boids</h4>
+			<p>The boids I used has 5 forces, prioritized in the following order: obstacle avoidance, separation, goal force, cohesion, alignment. This gives realistic looking behaviors without obvious problems most of the time. Obstacle avoidance is just a simple spring approach: if you're close to an object, you are pushed the other way. While the obstacle avoidance force is largest, avoidance isn't guaranteed, and a single boid can be pushed into an obstacle if the whole flock is pushing behind it. When the replanning is done and a boid is in an obstacle, it is pushed out into a valid configuration space point, so that a path can be found using the PRM and A*. The main problem with my implementation is that the boids are rather jittery and dont look very smooth when they have large forces on them.</p>
             <h2>Tools Used</h2>
             <ul>
                 <li>My game engine <a href="https://github.com/LiamTyler/Progression">Progression</a> for rendering, window management, and matrix libraries</li>
             </ul>
             <h2>Videos</h2>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/9pRq7YHwib4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/OVAWEL683-Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <h2>Images:</h2>
             <div class="centerText">
+                <img class="capWidth" src="boids_minima.png">
+                <p>Birds eye view of a lot of boids moving around some obstacles in the middle</p>
+                <hr>
                 <img class="capWidth" src="top_down.png">
                 <p>Birds eye view of the agent moving around the center obstacle</p>
-                <hr>
-                <img class="capWidth" src="side_view.png">
-                <p>Side view of the agent moving around the center obstacle</p>
                 <hr>
             </div>
             <h2>Artistic Submissions:</h2>
             <div class="centerText">
-                <img class="capWidth scale" src="">
-                <p></p>
+                <img class="capWidth" src="side_view.png">
+                <p>Side view of the agent moving around the center obstacle</p>
                 <hr>
             </div>
         </div>
