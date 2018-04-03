@@ -35,6 +35,10 @@
 			<p>As said earlier, I use a PRM combined with A* to do the global planning. To create the PRM, I just randomly sample points and do a naive collision check with the obstacles, as well as for finding each PRM node's connecting neighbors. When a new obstacle is added, instead of chosing to repair the PRM, I just generate a new one, and replan the paths for all the agents. While all of the agents can have different paths, the user gives them all the same goal when they left click on the plane. While constructing a new PRM and redoing a bunch of searches that are the same is not the effecient strategy, I can't notice a drop in FPS from this.</p>
 			<h4>Boids</h4>
 			<p>The boids I used has 5 forces, prioritized in the following order: obstacle avoidance, separation, goal force, cohesion, alignment. This gives realistic looking behaviors without obvious problems most of the time. Obstacle avoidance is just a simple spring approach: if you're close to an object, you are pushed the other way. While the obstacle avoidance force is largest, avoidance isn't guaranteed, and a single boid can be pushed into an obstacle if the whole flock is pushing behind it. When the replanning is done and a boid is in an obstacle, it is pushed out into a valid configuration space point, so that a path can be found using the PRM and A*. The main problem with my implementation is that the boids are rather jittery and dont look very smooth when they have large forces on them.</p>
+			<h4>A* vs UCS</h4>
+			<p>I noticed no difference from using A* and UCS / Dijkstra's. I tested with 200 agents all planning at the same time, 3 times in a short time window. There was no noticeable difference, as the screenshots illustrate.</p>
+                <img class="capWidth" src="a_star_fps.png">
+                <img class="capWidth" src="ucs_fps.png">
             <h2>Tools Used</h2>
             <ul>
                 <li>My game engine <a href="https://github.com/LiamTyler/Progression">Progression</a> for rendering, window management, and matrix libraries</li>
@@ -45,6 +49,9 @@
             <div class="centerText">
                 <img class="capWidth" src="boids_minima.png">
                 <p>Birds eye view of a lot of boids moving around some obstacles in the middle</p>
+                <hr>
+                <img class="capWidth" src="path_smoothing.png">
+                <p>A snapshot of the path smoothing working</p>
                 <hr>
                 <img class="capWidth" src="top_down.png">
                 <p>Birds eye view of the agent moving around the center obstacle</p>
