@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <?php include '../../header.php';?>
+    </head>
+    <body>
+        <?php include '../../navbar.php';?>
+        <div id="projects">
+            <h1 class="centerText">Real Time Post Reconstruction</h1>
+            <hr>
+            <h2>Group Members</h2>
+            <ul>
+                <li>Liam Tyler</li>
+                <li>Bridger Herman</li>
+                <li>Nikki Kyllonen</li>
+            </ul>
+            <h2>Description</h2>
+            <p>We implemented a basic real time object tracking system, which you might see extended for motion capture suits in movies, or CAVE VR environements. We setup two infrared cameras on a rig, pointing in the same direction. For objects we wanted to track, we attached three retroreflective markers to them. Every frame that the cameras would take a picture, we would use epipolar geometry to reconstruct the position of the markers, which then was used to determine the rotation of the object. We fed this data into a small renderer, which would move around a model to have the same position and rotation as the markers.</p>
+            <h2>Difficulties</h2>
+            <p>Some of the main difficulties we had were calibrating the cameras. We used the matlab stereo calibration method with a checkerboard image, but there was a lot of difficulty with the OptiTrack cameras and lots of manual effort for the calibration. Another challenge we had was with the OptiTrack API. It turned out to have several limitiations, such as being incapable of transmitting more than one grayscale image at a time, which is how we wanted to originally get the images to perform marker segmentation on.</p>
+            <h2>Paper</h2>
+            <p>We had to write a research paper for this project, which you can download <a href="computer-vision-project.pdf" download>here</a>.</p>
+            <h2>Features</h2>
+            <ul>
+                <li>Position reconstruction within one inch</li>
+                <li>Limited rotation reconstruction about the X and Y axis, no rotation in the Z axis (too few degrees of freedom)</li>
+                <li>Real time implementation</li>
+                <li>Smoothing the noise from position reconstruction</li>
+            </ul>
+            <h2>Tools Used</h2>
+            <ul>
+                <li>OpenGL for the rendering</li>
+                <li>SDL2 for the window management and user interaction</li>
+                <li>GLM for the vectors and matrices</li>
+                <li>OptiTrack infrared cameras and API for capturing the images</li>
+                <li>Retroreflective markers for tracking</li>
+            </ul>
+            <h2>Videos</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/jnlOnVAUHtU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </body>
+</html>
