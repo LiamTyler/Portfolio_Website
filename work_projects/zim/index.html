@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <?php include '../../header.php';?>
+  </head>
+  <body>
+      <?php include '../../navbar.php';?>
+      <div id="projects">
+        <h1 class="centerText">Volume Comparison Tool</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>Vital's application features many volume algoritms. For example, if you are looking at a scan of the chest, you could run an algorithm to segment out the heart, since that's the part you are currently interested in viewing. For the developers that work on those algorithms, they want to know when they come out with a new version of the algorithm, how it differs from the old one. The tool they had to do this comparison was over a decade old, using OpenGL 1. I redid the whole thing to use OpenGL 4, have a user interface, support much larger volumes, and added features to further enhance the comparison.</p>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>OpenGL for the rendering</li>
+          <li>Nanogui for the windowing and UI</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+          <li>Interactive volume comparison of volumes up to around 10GB in size</li>
+          <li>User interface for exploring the volumes and their differences</li>
+        </ul>
+      </div>
+    </body>
+</html>

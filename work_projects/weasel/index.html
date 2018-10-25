@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <?php include '../../header.php';?>
+  </head>
+  <body>
+      <?php include '../../navbar.php';?>
+      <div id="projects">
+        <h1 class="centerText">Regression Testing Framework</h1>
+        <hr>
+        <h2>Description</h2>
+        <p>Vital takes the results of scans such as MRI and CT scans, and builds 3D volumes that users can view and interact with. For the past 20 years though, they had never had a good and consistent way to test the volume building. Developers would continually create new tools when new features / versions came out. This framework that my mentor and I built allows developers to embed what is essentially a logger into their code. They specify the results that are important to record, and then the logger would record this, and send it to a backend, compare it against previous versions of the code, and generate a webpage displaying the results of test. It was very hassle free for the users, and was generic enough to be used on many existing projects, and hopefully many future ones. We made heavy use of c++ templates and flatbuffers to log the results, and get their values on a backend later for comparison.</p>
+        <p></p>
+        <h2>Tools Used</h2>
+        <ul>
+          <li>Heavy use of c++ templates</li>
+          <li>Flatbuffers for data serialization</li>
+          <li>Docker for running the backend</li>
+          <li>CMake for compilation and building on Windows, Linux, and Mac</li>
+        </ul>
+        <h2>Features</h2>
+        <ul>
+          <li>Templated API that is very user friendly</li>
+          <li>Serialization and posting to a backend</li>
+          <li>Cross platform compatibility</li>
+        </ul>
+      </div>
+    </body>
+</html>
